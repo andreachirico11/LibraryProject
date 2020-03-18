@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace Backend.Models
+{
+    public partial class Books
+    {
+        public Books()
+        {
+            Loans = new HashSet<Loans>();
+        }
+
+        public long IdBook { get; set; }
+        public string Title { get; set; }
+        public string Editor { get; set; }
+        public long? PublishingYear { get; set; }
+        public long IdGenre { get; set; }
+        public long IdAuthor { get; set; }
+        public string Description { get; set; }
+        public string Isbn { get; set; }
+
+        public virtual Authors IdAuthorNavigation { get; set; }
+        public virtual Genres IdGenreNavigation { get; set; }
+        public virtual ICollection<Loans> Loans { get; set; }
+    }
+}
