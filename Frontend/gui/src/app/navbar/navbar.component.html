@@ -1,0 +1,59 @@
+<nav class="navbar bg-dark fixed-top">
+  <div class="row w-100 m-0">
+
+
+
+    <div class="col-md-10 col-xs-11 p-0">
+      <div class="row">
+
+        <div class="align-self-center text-white">
+          <button
+            class="btn navbar-toggler btn-lg"
+            data-toggle="collapse"
+            data-target="#navCollapse"
+          >
+            <fa-icon [icon]="menuIcon" class="fa-md text-danger"></fa-icon>
+          </button>
+        </div>
+
+        <div class="col-md-4  align-self-center collapse " id="navCollapse">
+          <div class="navbar-nav navbar-expand-lg ">
+            <a href="#" class="nav-item  mx-auto text-white">
+              <h5>authors</h5>
+            </a>
+            <a href="#" class="nav-item mx-auto text-white">
+              <h5>authors</h5>
+            </a>
+            <a href="#" class="nav-item  mx-auto text-white">
+              <h5>authors</h5>
+            </a>
+          </div>
+        </div>
+        <div class=" text-center">
+          <a href="#" class="navbar-brand m-0">
+            <h1 class="text-white">GoodLibrary</h1>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-2  p-0 align-self-center">
+      <button class="btn btn-outline text-white w-30 mx-auto"
+      data-toggle="collapse"
+      data-target="#loginCollapse"
+      >Log In</button>
+      <button class="btn btn-outline text-white w-30  mx-auto">Sign In</button>
+    </div>
+  </div>
+  <!-- >>>>>>>>>>>>>>>>>>>FORM -->
+
+  <div class="row mt-2 w-100 m-0 p-0 collapse" id="loginCollapse">
+    <div class="col-md-5 offset-md-7">
+      <form class="form-inline">
+        <input class="form-control w-50" placeholder="Username" />
+        <input class="form-control w-50" placeholder="Password" />
+      </form>
+      <div class="btn btn-outline-danger  w-100" type="submit">Submit</div>
+    </div>
+  </div>
+</nav>
