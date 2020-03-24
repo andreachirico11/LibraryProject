@@ -6539,11 +6539,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\andrea.chirico.P-ACHIRICO\\Desktop\\LibraryProject\\Backend\\Backend.csproj",
+      "projectUniqueName": "C:\\Users\\andrea.chirico.P-ACHIRICO\\Desktop\\library2\\LibraryProject\\Backend\\Backend.csproj",
       "projectName": "Backend",
-      "projectPath": "C:\\Users\\andrea.chirico.P-ACHIRICO\\Desktop\\LibraryProject\\Backend\\Backend.csproj",
+      "projectPath": "C:\\Users\\andrea.chirico.P-ACHIRICO\\Desktop\\library2\\LibraryProject\\Backend\\Backend.csproj",
       "packagesPath": "C:\\Users\\andrea.chirico.P-ACHIRICO\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\andrea.chirico.P-ACHIRICO\\Desktop\\LibraryProject\\Backend\\obj\\",
+      "outputPath": "C:\\Users\\andrea.chirico.P-ACHIRICO\\Desktop\\library2\\LibraryProject\\Backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\andrea.chirico.P-ACHIRICO\\AppData\\Roaming\\NuGet\\NuGet.Config"
