@@ -9,6 +9,15 @@ import { BodyComponent } from './body/body.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RegistrationModalComponent } from './registrationForm/registrationForm.component';
+import { LibraryModule } from './library/library.module';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+
+
+const routes: Routes = [
+  {path: '', component: HomeComponent},
+  {path: '*', redirectTo: ''},
+];
 
 
 @NgModule({
@@ -16,13 +25,16 @@ import { RegistrationModalComponent } from './registrationForm/registrationForm.
     AppComponent,
     BodyComponent,
     NavbarComponent,
-    RegistrationModalComponent
+    RegistrationModalComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FontAwesomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LibraryModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]

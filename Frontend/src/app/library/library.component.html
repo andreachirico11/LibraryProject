@@ -1,0 +1,52 @@
+<div class="container my-5">
+  <ul
+    class="list-group list-group-flush"
+    *ngFor="let book of libraryDb; index as i"
+  >
+    <li class="list-group-item text-center text-md-left my-2">
+      <div class="media bg-light row">
+        <!-- ################################# COL 1 -->
+        <div
+          class="col-md-4 "
+          [ngClass]="{ 'order-md-3 text-md-right': i % 2 !== 0 }"
+        >
+          <img
+            src="https://source.unsplash.com/random/250x350"
+            alt="booktitle"
+            class="img-fluid"
+          />
+        </div>
+        <!-- ####################################### COL 2 -->
+        <div class="col-md-4 py-5 " [ngClass]="{ 'order-md-2': i % 2 !== 0 }">
+          <div class="media-body font-italic">
+            <h4 class="font-weight-bold">{{ book.title }}</h4>
+            by {{ book.idAuthor }}
+            <h6>{{ book.editor }}</h6>
+          </div>
+          <div *ngIf="" class="alert alert-success align-items-end">
+            <fa-icon [icon]="bookIcon" class="mr-2"></fa-icon>
+            <strong>Available</strong>
+          </div>
+          <div *ngIf="" class="alert alert-danger align-items-end">
+            <fa-icon [icon]="bookIcon" class="mr-2"></fa-icon>
+            <strong>Not Available</strong>
+          </div>
+        </div>
+        <!-- ############################### COL 3  -->
+        <div class="col-md-4" [ngClass]="{ 'order-md-1': i % 2 !== 0 }">
+          <div
+            class="row text-md-left text-sm-center"
+            [ngClass]="{ 'text-md-right': i % 2 === 0 }"
+          >
+            <div class="col-md-6" [ngClass]="{ 'order-2': i % 2 !== 0 }"></div>
+            <div class="col-md-6" [ngClass]="{ 'order-1': i % 2 !== 0 }">
+              <button class="btn btn-outline-dark">Want to Read</button>
+              <button class="btn btn-outline-dark">Favourites</button>
+              <button class="btn btn-outline-dark">Borrow</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
