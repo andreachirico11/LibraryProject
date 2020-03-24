@@ -111,9 +111,10 @@
         id="phone"
         placeholder="Phone Number"
         formControlName="phoneNumber"
-       
-      />
-    </div>
+        [ngClass]=" {'is-valid' : registrationForm.get('phoneNumber').touched && registrationForm.get('phoneNumber').valid }"
+        [ngClass]=" {'is-invalid' : registrationForm.get('phoneNumber').touched && registrationForm.get('phoneNumber').invalid }"
+        />
+      </div>
 
     <button
       class="btn btn-block btn-outline-success mt-2 "
