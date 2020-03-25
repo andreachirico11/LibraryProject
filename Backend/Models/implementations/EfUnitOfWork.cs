@@ -31,9 +31,9 @@ namespace Backend.Models
             return this.BooksRepo.GetBookById(id);
         }
 
-        public Task<int> InsertBook(BookDTO newBook)
+        public  Task<bool> InsertBook(BookDTO newBook)
         {
-            return this.BooksRepo.InsertNewBook(newBook);
+            return  this.BooksRepo.InsertNewBook(newBook);
         }
 
 

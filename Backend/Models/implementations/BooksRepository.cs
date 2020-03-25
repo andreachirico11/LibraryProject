@@ -9,21 +9,23 @@ namespace Backend.Models
     public class BooksRepository : IBooksRepository
     {
         public IQueryable<Books> Books { get; set; }
+        public IGenresRepository GenresRepository { get; set; }
         public DBLibraryContext context { get; set; }
 
-        public BooksRepository(DBLibraryContext ctx)
+        public BooksRepository(DBLibraryContext ctx, IGenresRepository genRepo)
         {
             this.context = ctx;
             this.Books = ctx.Books;
+            this.GenresRepository = genRepo;
         }
 
 
 
-        public Task<List<BookDTO>> GetAllBooks()
+        public async Task<List<BookDTO>> GetAllBooks()
         {
             try
             {
-                var books = context.Books
+                var books = await context.Books
                         .Include(b => b.IdAuthorNavigation)
                         .Include(b => b.IdGenreNavigation)
                         .Select(b => new BookDTO(b, b.IdGenreNavigation, b.IdAuthorNavigation)
@@ -55,21 +57,35 @@ namespace Backend.Models
             }
         }
 
-        public Task<int> InsertNewBook(BookDTO newBook)
+        public async Task<bool> InsertNewBook(BookDTO newBook)
         {
-            Task<int> success;
+            var id = await this.GetMaxID() + 1;
+            newBook.IdBook = id;
             Books book;
-            long idGen = 1;
+            long idGen;
             long idAuth = 1;
-            var genres = this.context.Genres.Where(g => g.Name == newBook.Genre);
+
+            var genre = await GenresRepository.GetGenreByName(newBook.Genre);
+            if (genre == null)
+            {
+                idGen = await this.GenresRepository.InsertNewGenre(newBook.Genre);
+            }
+            else
+            {
+                idGen = genre.IdGenre;
+            }
 
             book = new Books(newBook, idGen, idAuth);
             context.Add(book);
-            success = context.SaveChangesAsync();
-            Console.WriteLine(success);
-            return success;
-            // throw new NotImplementedException();
+            await context.SaveChangesAsync();
+            return true;
         }
+
+
+
+
+
+
         public Task<int> UpdateBook(BookDTO newBook)
         {
             throw new NotImplementedException();
@@ -77,6 +93,11 @@ namespace Backend.Models
         public Task<int> DeleteBookById(long id)
         {
             throw new NotImplementedException();
+        }
+        public async Task<long> GetMaxID()
+        {
+            var lastGenre = await this.context.Books.OrderByDescending(g => g.IdBook).FirstOrDefaultAsync();
+            return lastGenre.IdBook;
         }
     }
 }

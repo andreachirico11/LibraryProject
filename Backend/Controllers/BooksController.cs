@@ -31,10 +31,9 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        public async Task<int> PostBook(BookDTO newBook)
+        public async Task<bool> PostBook(BookDTO newBook)
         {
             return await unitOfWork.InsertBook(newBook);
-            // throw new NotImplementedException();
         }
 
 

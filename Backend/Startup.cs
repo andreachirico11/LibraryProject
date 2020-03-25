@@ -36,6 +36,8 @@ namespace Backend
             services.AddDbContext<DBLibraryContext>();
             services.AddTransient<IUnitOfWork, EfUnitOfWork>();
             services.AddTransient<IBooksRepository, BooksRepository>();
+            services.AddTransient<IGenresRepository, GenresRepository>();
+            services.AddTransient<IAuthorsRepository, AuthorsRepository>();
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",

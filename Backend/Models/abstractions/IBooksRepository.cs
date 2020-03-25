@@ -10,10 +10,9 @@ namespace Backend.Models {
         Task<List<BookDTO>> GetAllBooks ();
         Task<BookDTO> GetBookById (long id);
         
-        Task<int> InsertNewBook (BookDTO newBook);
+        Task<bool> InsertNewBook (BookDTO newBook);
         Task<int> UpdateBook (BookDTO newBook);
         Task<int> DeleteBookById (long id);
         
-
     }
 }
