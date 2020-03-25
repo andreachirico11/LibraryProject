@@ -124,3 +124,5 @@ C:\Users\andrea.chirico.P-ACHIRICO\Desktop\library2\LibraryProject\Backend\obj\D
 C:\Users\andrea.chirico.P-ACHIRICO\Desktop\library2\LibraryProject\Backend\obj\Debug\netcoreapp3.1\Backend.pdb
 C:\Users\andrea.chirico.P-ACHIRICO\Desktop\library2\LibraryProject\Backend\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\andrea.chirico.P-ACHIRICO\Desktop\library2\LibraryProject\Backend\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\andrea.chirico.P-ACHIRICO\Desktop\LibraryProject\Backend\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\andrea.chirico.P-ACHIRICO\Desktop\LibraryProject\Backend\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
