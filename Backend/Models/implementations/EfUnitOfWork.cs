@@ -13,21 +13,63 @@ namespace Backend.Models
     {
         DBLibraryContext context = new DBLibraryContext();
 
-
-        public async Task<List<Books>> GetAllBooks() 
+        public IBookRepository BooksRepo { get; set; }
+        public EfUnitOfWork(IBookRepository bookR) 
         {
-            try {
-                var books = context.Books
-                            .Include(b => b.IdAuthorNavigation)
-                            .ToList<Books>();
-                return books;
-            }
-            catch 
-            {
-                Console.WriteLine("getAllError");
-                throw ;
-            }
+            this.BooksRepo = bookR;
         }
+        // public async Task<IQueryable<string>> GetAllBooks() 
+        // {
+        //     try {
+        //         var books = context.Books
+        //                     .Include(b => b.IdAuthorNavigation)
+        //                     .Select(b => b.IdAuthorNavigation.Name);
+        //         return books;
+        //     }
+        //     catch 
+        //     {
+        //         Console.WriteLine("getAllError");
+        //         throw ;
+        //     }
+        // }
+
+
+        public Task<List<BookDTO>> GetAllBooks()
+        {
+            return this.BooksRepo.GetAllBooks();
+        } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public async Task<Books> GetBookById(long id)
         {
