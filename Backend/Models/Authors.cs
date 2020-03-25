@@ -9,6 +9,12 @@ namespace Backend.Models
         {
             Books = new HashSet<Books>();
         }
+        public Authors(long id, string name, string surname)
+        {
+            this.IdAuthor = id;
+            this.Name = name;
+            this.Surname = surname;
+        }
 
         public long IdAuthor { get; set; }
         public string Name { get; set; }

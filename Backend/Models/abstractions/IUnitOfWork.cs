@@ -8,10 +8,9 @@ namespace Backend.Models
 {
     public interface IUnitOfWork
     {
-        Task<List<Books>> GetAllBooks();
-        Task<Books> GetBookById(long id);
-        Task<int> InsertBook(Books newBook);
-        Task<int> UpdateBook(Books updatedBook);
-        Task<int> DeleteBook(long id);
+        IBooksRepository BooksRepo { get; set; }
+        Task<List<BookDTO>> GetAllBooks();
+        Task<BookDTO> GetBookById(long id);
+        Task<bool> InsertBook(BookDTO newBook);
     }
 }
