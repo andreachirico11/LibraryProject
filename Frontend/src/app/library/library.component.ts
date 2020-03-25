@@ -24,8 +24,9 @@ export class LibraryComponent implements OnInit, OnDestroy {
 
   ngOnInit(){
     this.dbSubs = this.dbservice.getAllBooks().subscribe(
-      r => {
-        this.libraryDb = [...this.libraryDb, ...r];
+      (r: BookModel[]) => {
+        console.log(r);
+        this.libraryDb = [ ...this.libraryDb, ...r];
       }
     );
   }

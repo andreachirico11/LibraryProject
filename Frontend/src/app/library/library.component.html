@@ -11,7 +11,7 @@
           [ngClass]="{ 'order-md-3 text-md-right': i % 2 !== 0 }"
         >
           <img
-            src="https://source.unsplash.com/random/250x350"
+            [src]="book.imagePath"
             alt="booktitle"
             class="img-fluid"
           />
@@ -20,7 +20,7 @@
         <div class="col-md-4 py-5 " [ngClass]="{ 'order-md-2': i % 2 !== 0 }">
           <div class="media-body font-italic">
             <h4 class="font-weight-bold">{{ book.title }}</h4>
-            by {{ book.idAuthor }}
+            by {{ book.author }}
             <h6>{{ book.editor }}</h6>
           </div>
           <div *ngIf="" class="alert alert-success align-items-end">
