@@ -9,9 +9,9 @@ namespace Backend.Models
         IQueryable<Authors> Authors { get; set; }
         DBLibraryContext context { get; set; }
         Task<List<AuthorDTO>> GetAllAuthors ();
-        Task<AuthorDTO> GetAuthorById (long id);
+        Task<AuthorDTO> GetAuthorByCompleteName (string fullName);
         
-        Task<int> InsertNewAuthor (BookDTO newBook);
+        Task<long> InsertNewAuthor (string newAuthorFullName);
         Task<int> DeleteAuthorById (long id);
     }
 }

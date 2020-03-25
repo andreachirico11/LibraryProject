@@ -10,13 +10,15 @@ namespace Backend.Models
     {
         public IQueryable<Books> Books { get; set; }
         public IGenresRepository GenresRepository { get; set; }
+        public  IAuthorsRepository AuthorsRepository { get; set; }
         public DBLibraryContext context { get; set; }
 
-        public BooksRepository(DBLibraryContext ctx, IGenresRepository genRepo)
+        public BooksRepository(DBLibraryContext ctx, IGenresRepository genRepo,  IAuthorsRepository authorsRepository)
         {
             this.context = ctx;
             this.Books = ctx.Books;
             this.GenresRepository = genRepo;
+            this.AuthorsRepository = authorsRepository;
         }
 
 
@@ -63,8 +65,8 @@ namespace Backend.Models
             newBook.IdBook = id;
             Books book;
             long idGen;
-            long idAuth = 1;
-
+            long idAuth;
+            
             var genre = await GenresRepository.GetGenreByName(newBook.Genre);
             if (genre == null)
             {
@@ -73,6 +75,16 @@ namespace Backend.Models
             else
             {
                 idGen = genre.IdGenre;
+            }
+
+            var author = await AuthorsRepository.GetAuthorByCompleteName(newBook.Author);
+            if(author == null)
+            {
+                idAuth = await this.AuthorsRepository.InsertNewAuthor(newBook.Author);
+            }
+            else
+            {
+                idAuth = author.IdAuthor;
             }
 
             book = new Books(newBook, idGen, idAuth);

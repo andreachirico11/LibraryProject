@@ -56,7 +56,6 @@ namespace Backend.Models
         public async Task<long> GetMaxID() 
         {
             var lastGenre = await this.context.Genres.OrderByDescending( g => g.IdGenre).FirstOrDefaultAsync();
-            System.Console.WriteLine(lastGenre);
             return lastGenre.IdGenre;
         }
     }
