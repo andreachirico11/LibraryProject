@@ -1,19 +1,17 @@
-  
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Backend.Models {
-    public interface IBookRepository
+    public interface IBooksRepository
     {   
         IQueryable<Books> Books {get; set;}
         DBLibraryContext context {get; set;}
         Task<List<BookDTO>> GetAllBooks ();
-        Task<Books> GetBookById ();
+        Task<BookDTO> GetBookById (long id);
         
-        Task<int> InsertNewBook (Books newBook);
-        Task<int> UpdateBook (Books newBook);
+        Task<int> InsertNewBook (BookDTO newBook);
+        Task<int> UpdateBook (BookDTO newBook);
         Task<int> DeleteBookById (long id);
         
 

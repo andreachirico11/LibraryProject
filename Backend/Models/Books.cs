@@ -22,5 +22,17 @@ namespace Backend.Models
         public virtual Authors IdAuthorNavigation { get; set; }
         public virtual Genres IdGenreNavigation { get; set; }
         public virtual ICollection<Loans> Loans { get; set; }
+
+        public Books(BookDTO newBook, long idGen, long idAuth) 
+        {
+            this.IdBook = newBook.IdBook;
+            this.Title = newBook.Title;
+            this.Editor = newBook.Editor;
+            this.PublishingYear = newBook.PublishingYear;
+            this.IdGenre = idGen;
+            this.IdAuthor = idAuth;
+            this.Description = newBook.Description;
+            this.Isbn = newBook.Isbn;
+        }
     }
 }

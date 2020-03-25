@@ -25,18 +25,21 @@ namespace Backend.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<Books> GetBookById(long id)
+        public async Task<BookDTO> GetBookById(long id)
         {
-            // return await unitOfWork.GetBookById(id);
-            throw new NotImplementedException();
+             return await unitOfWork.GetBookById(id);
         }
 
         [HttpPost]
-        public async Task<int> PostBook(Books newBook)
+        public async Task<int> PostBook(BookDTO newBook)
         {
-            // return await unitOfWork.InsertBook(newBook);
-            throw new NotImplementedException();
+            return await unitOfWork.InsertBook(newBook);
+            // throw new NotImplementedException();
         }
+
+
+
+
 
         [HttpPut("{id}")]
         public async Task<int> UpdateBook(Books newBook, long id)

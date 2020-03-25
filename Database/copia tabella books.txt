@@ -1,68 +1,52 @@
-########################################### db completo
 [
     {
         "idBook": 1,
-        "title": "Storia antica L'Ottocento",
-        "editor": "Laterza",
-        "publishingYear": null,
-        "idGenre": 2,
-        "idAuthor": 3,
-        "description": null,
-        "isbn": null,
-        "idAuthorNavigation": null,
-        "idGenreNavigation": null,
-        "loans": []
+        "title": "Upright Women Wanted",
+        "editor": "Mondadori",
+        "publishingYear": 2020,
+        "genre": "Fantasy",
+        "author": "Sarah Gailey",
+        "description": "Esther is a stowaway. She's hidden herself away in the Librarian's book wagon in an attempt to escape the marriage her father has arranged for her--a marriage to the man who was previously engaged to her best friend. Her best friend who she was in love with. Her best friend who was just executed for possession of resistance propaganda.\n\nThe future American Southwest is full of bandits, fascists, and queer librarian spies on horseback trying to do the right thing.",
+        "isbn": "1250213584"
     },
     {
         "idBook": 2,
-        "title": "Storia moderna 1492-1848",
-        "editor": "feltrinelli",
-        "publishingYear": 2016,
-        "idGenre": 2,
-        "idAuthor": 2,
-        "description": null,
-        "isbn": null,
-        "idAuthorNavigation": null,
-        "idGenreNavigation": null,
-        "loans": []
+        "title": "Facebook: The Inside Story",
+        "editor": "InMondadori",
+        "publishingYear": 2020,
+        "genre": "Saggistica",
+        "author": "Steven Levy",
+        "description": "Today, Facebook is nearly unrecognizable from Zuckerberg's first, modest iteration. It has grown into a tech giant, the largest social media platform and one of the most gargantuan companies in the world, with a valuation of more than $576 billion and almost 3 billion users, including those on its fully owned subsidiaries, Instagram and WhatsApp. There is no denying the power and omnipresence of Facebook in American daily life. And in light of recent controversies surrounding election-influencing \"fake news\" accounts, the handling of its users' personal data, and growing discontent with the actions of its founder and CEO, never has the company been more central to the national conversation.",
+        "isbn": "0735213151"
     },
     {
         "idBook": 3,
         "title": "Assasinio sull'Orient Express",
-        "editor": "Feltrinelli",
-        "publishingYear": 0,
-        "idGenre": 1,
-        "idAuthor": 1,
-        "description": null,
-        "isbn": null,
-        "idAuthorNavigation": null,
-        "idGenreNavigation": null,
-        "loans": []
+        "editor": "Mondadori",
+        "publishingYear": 2007,
+        "genre": "Fantasy",
+        "author": "Agatha Christie",
+        "description": "L'Orient-Express, il famoso treno che congiunge Parigi con Istanbul, è costretto ad una sosta forzata, bloccato dalla neve. A bordo qualcuno ne approfitta per compiere un efferato delitto, ma, sfortunatamente per l'assassino, tra i passeggeri c'è anche il famoso investigatore belga Hercule Poirot, al quale verranno affidate le indagini. Poirot, in effetti, risolverà il caso, non prima, però, di essersi imbattuto in una sensazionale sorpresa.",
+        "isbn": "8804519045 "
     },
     {
         "idBook": 4,
         "title": "Linguaggio C",
         "editor": "McGraw-Hill Education",
         "publishingYear": 2013,
-        "idGenre": 4,
-        "idAuthor": 4,
-        "description": null,
-        "isbn": null,
-        "idAuthorNavigation": null,
-        "idGenreNavigation": null,
-        "loans": []
+        "genre": "Informatica",
+        "author": "Alessandro Bellini",
+        "description": "Il volume si propone come una guida graduale e completa al linguaggio C e alla programmazione strutturata e modulare. Particolare attenzione è posta sui principi e sulle tecniche di programmazione, il controllo del flusso di esecuzione, la rappresentazione dei dati, la definizione e l'utilizzo di funzioni e librerie, le strutture dati, le operazioni di ingresso e uscita. Per quando riguarda il C il testo è stato aggiornato allo standard C11. La nuova edizione è anche anche un'introduzione alla programmazione orientata agli oggetti e al linguaggio Objective-C, che permette di programmare le app per iPhone, Ipad e per i computer della Apple. Grande cura è rivolta ai concetti di generalizzazione, classe, oggetto, istanza, ereditarietà e alla",
+        "isbn": "9788838665790"
     },
     {
         "idBook": 5,
         "title": "Storia contempo",
-        "editor": "Laterz",
-        "publishingYear": null,
-        "idGenre": 1,
-        "idAuthor": 2,
-        "description": null,
-        "isbn": null,
-        "idAuthorNavigation": null,
-        "idGenreNavigation": null,
-        "loans": []
+        "editor": "Laterza",
+        "publishingYear": 2018,
+        "genre": "Fantasy",
+        "author": "Carlo Capra",
+        "description": "l Novecento, un secolo che si apre col trauma originario della Grande Guerra e si chiude con le grandi trasformazioni seguite alla caduta del muro di Berlino: è la periodizzazione di questo manuale, che si spinge ad analizzare gli ultimi eventi dei nostri giorni senza rinunciare a una struttura agile, maneggevole e rigorosa, a una scrittura piana e comprensibile, a una strumentazione didattica particolarmente efficace, dalle numerose cartine alle bibliografie ragionate che guidano l’approfondimento dei temi toccati. In questa nuova edizione, fortemente accresciuta e rivista, sono state inserite numerose nuove Parole chiave, indispensabili per focalizzare le principali categorie tematico-concettuali del periodo.",
+        "isbn": "9788842087427"
     }
 ]
