@@ -1,9 +1,7 @@
 <nav class="navbar bg-dark ">
   <div class="row w-100 m-0">
-
     <div class="col-md-10 col-xs-11 p-0">
       <div class="row">
-
         <div class="align-self-center text-white">
           <button
             class="btn navbar-toggler btn-lg"
@@ -16,7 +14,11 @@
 
         <div class="col-md-4  align-self-center collapse " id="navCollapse">
           <div class="navbar-nav navbar-expand-lg ">
-            <a href="#" class="nav-item  mx-auto text-white" routerLink="./library">
+            <a
+              href="#"
+              class="nav-item  mx-auto text-white"
+              routerLink="./library"
+            >
               <h5>Library</h5>
             </a>
             <a href="#" class="nav-item mx-auto text-white">
@@ -35,29 +37,58 @@
       </div>
     </div>
 
-    <div class="col-md-2  p-0 align-self-center">
-      <button class="btn btn-outline text-white w-30 mx-auto"
-      data-toggle="collapse"
-      data-target="#loginCollapse"
-      >Log In</button>
-      <button class="btn btn-outline text-white w-30  mx-auto"
-      data-toggle="modal"
-      data-target="#regModal"
-      >Sign In</button>
+    <div class="col-md-2  p-0 align-self-center" *ngIf="!isLoggedIn; else logged">
+      <button
+        class="btn btn-outline text-white w-30 mx-auto"
+        data-toggle="collapse"
+        data-target="#loginCollapse"
+      >
+        Log In
+      </button>
+      <button
+        class="btn btn-outline text-white w-30  mx-auto"
+        data-toggle="modal"
+        data-target="#regModal"
+      >
+        Sign In
+      </button>
     </div>
+
+    <ng-template #logged>
+      <div class="col-md-2  p-0 align-self-center">
+        <div class="row">
+          <fa-icon [icon]="avatarIcon" class="fa-md text-danger"></fa-icon>
+          <span class="text-white ml-2">Hello {{ userName }}!</span>
+        </div>
+        <div class="row">
+          <button class="btn btn-outline-danger btn-sm" (click)="logout()">Log Out</button>
+        </div>
+      </div>
+    </ng-template>
   </div>
+
   <!-- >>>>>>>>>>>>>>>>>>>FORM -->
 
   <div class="row mt-2 w-100 m-0 p-0 collapse" id="loginCollapse">
     <div class="col-md-5 offset-md-7">
-      <form class="form-inline" [formGroup]="accessForm">
-        <input class="form-control w-50" placeholder="Username" />
-        <input class="form-control w-50" placeholder="Password" />
+      <form class="form-inline" [formGroup]="accessForm" (ngSubmit)="login()">
+        <input
+          class="form-control w-50"
+          placeholder="Email"
+          formControlName="email"
+        />
+        <input
+          class="form-control w-50"
+          placeholder="Password"
+          formControlName="password"
+        />
+        <button class="btn btn-outline-danger  w-100" type="submit"
+        data-toggle="collapse"
+        data-target="#loginCollapse"
+        >
+          Submit
+        </button>
       </form>
-      <div class="btn btn-outline-danger  w-100" type="submit">Submit</div>
     </div>
   </div>
-
-
-
 </nav>

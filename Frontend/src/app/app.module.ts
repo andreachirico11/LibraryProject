@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -12,6 +12,8 @@ import { RegistrationModalComponent } from './registrationForm/registrationForm.
 import { LibraryModule } from './library/library.module';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { MockInterceptorService } from './shared/authentication/mockInterceptor.service';
+import { AuthenticationService } from './shared/authentication/authentication.service';
 
 
 const routes: Routes = [
@@ -36,7 +38,11 @@ const routes: Routes = [
     LibraryModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, useClass: MockInterceptorService, multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
