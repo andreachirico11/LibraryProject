@@ -15,7 +15,11 @@ export class dbService {
     return this.http.get<BookModel[]>(environment.connectionStr + "books").pipe(
       map( books => {
         books.forEach( b => {
-          b.imagePath = `http://covers.openlibrary.org/b/isbn/${b.isbn}-M.jpg`;
+          // b.imagePath = `http://covers.openlibrary.org/b/isbn/${b.isbn}-M.jpg`;
+          this.http.get(`https://www.googleapis.com/books/v1/volumes?q=isbn:${b.isbn}`).subscribe( r => {
+            const resp = JSON.parse(JSON.stringify(r));
+            b.imagePath = resp.items[0].volumeInfo.imageLinks.thumbnail;
+          })
         })
         return books
       }));
