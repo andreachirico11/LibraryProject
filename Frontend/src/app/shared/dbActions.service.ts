@@ -8,7 +8,6 @@ import { map } from "rxjs/operators";
 @Injectable({ providedIn: "root" })
 export class dbService {
   constructor(private http: HttpClient) {}
-  // ################SAMPLE http://covers.openlibrary.org/b/isbn/9780385472579-S.jpg
   private head = new HttpHeaders({ "Content-Type": "application/json" });
 
   getAllBooks() {
