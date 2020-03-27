@@ -1,20 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { faCheck, faEnvelope, faUser , faMap, faCity, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { faCheck, faEnvelope, faUser , faMap, faCity, faPhone , faWindowClose} from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
 
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registrationForm.component.html',
+  styleUrls: ['./registration.component.css']
 })
 // styles: ['input.ng-invalid {border: 5px solid red}']
 
 export class RegistrationModalComponent implements OnInit {
-  public iconsArray = [faCheck, faEnvelope, faUser , faMap, faCity, faPhone];
+  public iconsArray = [faCheck, faEnvelope, faUser , faMap, faCity, faPhone, faWindowClose];
   registrationForm: FormGroup;
-  statusSubs: Subscription;
+
+  @Output() closeEvent = new EventEmitter<void>()
 
   ngOnInit() {
     this.registrationForm = new FormGroup({
@@ -25,9 +26,10 @@ export class RegistrationModalComponent implements OnInit {
       'city': new FormControl('', [Validators.required]),
       'phoneNumber': new FormControl('', [Validators.required, Validators.minLength(10)])
     });
-    this.statusSubs = this.registrationForm.statusChanges.subscribe(s => {
+  }
 
-    });
+  close() {
+    this.closeEvent.emit();
   }
 
   submit() {}

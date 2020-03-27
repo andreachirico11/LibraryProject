@@ -13,9 +13,8 @@ import { LibraryModule } from './library/library.module';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { MockInterceptorService } from './shared/mockInterceptors/mockAuth.service';
-import { AuthenticationService } from './shared/authentication.service';
-import { CustomValidators } from './shared/customValidators';
 import { UserModule } from './user/user.module';
+import { PlaceholderDirective } from './registrationForm/placeholder.directive';
 
 
 const routes: Routes = [
@@ -30,7 +29,8 @@ const routes: Routes = [
     BodyComponent,
     NavbarComponent,
     RegistrationModalComponent,
-    HomeComponent
+    HomeComponent,
+    PlaceholderDirective
   ],
   imports: [
     BrowserModule,

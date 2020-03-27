@@ -1,3 +1,4 @@
+<ng-template appPlaceholder ></ng-template>
 <nav class="navbar bg-dark ">
   <div class="row w-100 m-0">
     <div class="col-md-10 col-xs-11 p-0">
@@ -8,7 +9,7 @@
             data-toggle="collapse"
             data-target="#navCollapse"
           >
-            <fa-icon [icon]="menuIcon" class="fa-md text-danger"></fa-icon>
+            <fa-icon [icon]="menuIcon"  class="fa-md text-danger"></fa-icon>
           </button>
         </div>
 
@@ -37,7 +38,10 @@
       </div>
     </div>
 
-    <div class="col-md-2  p-0 align-self-center" *ngIf="!isLoggedIn; else logged">
+    <div
+      class="col-md-2  p-0 align-self-center"
+      *ngIf="!isLoggedIn; else logged"
+    >
       <button
         class="btn btn-outline text-white w-30 mx-auto"
         data-toggle="collapse"
@@ -45,11 +49,8 @@
       >
         Log In
       </button>
-      <button
-        class="btn btn-outline text-white w-30  mx-auto"
-        data-toggle="modal"
-        data-target="#regModal"
-      >
+      <button class="btn btn-outline text-white w-30  mx-auto"
+      (click)="openDialogForm()">
         Sign In
       </button>
     </div>
@@ -61,15 +62,21 @@
           <span class="text-white ml-2">Hello {{ userName }}!</span>
         </div>
         <div class="row">
-          <button class="btn btn-outline-danger btn-sm" (click)="logout()">Log Out</button>
-          <button class="btn btn-outline-success btn-sm" routerLink="/user/favourites">My Profile</button>
-
+          <button class="btn btn-outline-danger btn-sm" (click)="logout()">
+            Log Out
+          </button>
+          <button
+            class="btn btn-outline-success btn-sm"
+            routerLink="/user/favourites"
+          >
+            My Profile
+          </button>
         </div>
       </div>
     </ng-template>
   </div>
 
-  <!-- >>>>>>>>>>>>>>>>>>>FORM -->
+  <!-- >>>>>>>>>>>>>>>>>>>LOGIN FORM -->
 
   <div class="row mt-2 w-100 m-0 p-0 collapse" id="loginCollapse">
     <div class="col-md-5 offset-md-7">
@@ -84,9 +91,11 @@
           placeholder="Password"
           formControlName="password"
         />
-        <button class="btn btn-outline-danger  w-100" type="submit"
-        data-toggle="collapse"
-        data-target="#loginCollapse"
+        <button
+          class="btn btn-outline-danger  w-100"
+          type="submit"
+          data-toggle="collapse"
+          data-target="#loginCollapse"
         >
           Submit
         </button>
