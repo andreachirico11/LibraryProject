@@ -1,8 +1,9 @@
 
 <ul class="list-group mb-5">
-  <li class="list-group-item">Via Roma 3453 Genova</li>
-  <li class="list-group-item">+39 34729837529835</li>
-  <li class="list-group-item">email@email.it</li>
-  <li class="list-group-item">Admin</li>
+  <li class="list-group-item">{{loggedUser.adress}}</li>
+  <li class="list-group-item">{{loggedUser.phoneNumber}}</li>
+  <li class="list-group-item">{{loggedUser.email}}</li>
+  <li *ngIf="loggedUser.isAdmin === true" class="list-group-item">Admin</li>
+  <li *ngIf="loggedUser.isAdmin === false" class="list-group-item">Common User</li>
 </ul>
 <button class="btn btn-outline-warning rounded btn-block">Edit Info</button>

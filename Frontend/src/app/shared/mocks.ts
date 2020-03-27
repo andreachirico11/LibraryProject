@@ -80,17 +80,16 @@ export const mockBooksDbJsonPost = {
   "idGenreNavigation": null,
    "loans": []
 }
-export const mockBook = new BookModel(
-  7,
-  'guerra e pace',
-  'giovanni',
-  null,
-  3,
-  4,
-  null,
-  null,
-  null,
-  null,
-  []
-);
+// export const mockBook = new BookModel(
+//   7,
+//   'guerra e pace',
+//   'giovanni',
+//   null,
+//   3,
+//   4,
+//   null,
+//   null,
+//   null,
+//   null
+// );
 
