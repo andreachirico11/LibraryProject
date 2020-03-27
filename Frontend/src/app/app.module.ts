@@ -19,7 +19,7 @@ import { PlaceholderDirective } from './registrationForm/placeholder.directive';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: '*', redirectTo: ''},
+  {path: '**', redirectTo: '', pathMatch: 'full'},
 ];
 
 

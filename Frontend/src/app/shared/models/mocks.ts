@@ -1,4 +1,5 @@
 import { BookModel } from './bookModel';
+import { User } from './userModel';
 
 export const mockBooksDbJson = [
   {
@@ -93,3 +94,33 @@ export const mockBook = new BookModel(
   null
 );
 
+export const Users = [
+  new User(
+    "giuseppe@email.it",
+    "giuseppe123",
+    "abcdefg",
+    false,
+    "giuseppe",
+    "giuseppi",
+    1,
+    3470000,
+    "via giuseppe 123 genova",
+    "https://source.unsplash.com/tD1XD54mx8w/600x600",
+    [],
+    []
+  ),
+  new User(
+    "carlo@email.it",
+    "carlo123",
+    "gklmno",
+    true,
+    "carlo",
+    "carli",
+    2,
+    34704582039,
+    "via carlo 1 genova",
+    "https://source.unsplash.com/_cvwXhGqG-o/600x600",
+    [],
+    []
+  )
+];

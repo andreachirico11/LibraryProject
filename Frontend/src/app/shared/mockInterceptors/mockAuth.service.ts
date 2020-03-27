@@ -7,6 +7,7 @@ import {
 } from "@angular/common/http";
 import { of } from "rxjs";
 import { User } from "../models/userModel";
+import { Users } from "../models/mocks";
 
 Injectable({ providedIn: "root" });
 
@@ -42,33 +43,4 @@ export class MockInterceptorService implements HttpInterceptor {
   }
 }
 
-const Users = [
-  new User(
-    1,
-    "giuseppe@email.it",
-    "giuseppe123",
-    "abcdefg",
-    false,
-    "giuseppe",
-    "giuseppi",
-    3470000,
-    "via giuseppe 123 genova",
-    "https://source.unsplash.com/tD1XD54mx8w/600x600",
-    [],
-    []
-  ),
-  new User(
-    2,
-    "carlo@email.it",
-    "carlo123",
-    "gklmno",
-    true,
-    "carlo",
-    "carli",
-    34704582039,
-    "via carlo 1 genova",
-    "https://source.unsplash.com/_cvwXhGqG-o/600x600",
-    [],
-    []
-  )
-];
+

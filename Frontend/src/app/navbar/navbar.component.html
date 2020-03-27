@@ -1,4 +1,4 @@
-<ng-template appPlaceholder ></ng-template>
+<ng-template appPlaceholder></ng-template>
 <nav class="navbar bg-dark ">
   <div class="row w-100 m-0">
     <div class="col-md-10 col-xs-11 p-0">
@@ -9,7 +9,7 @@
             data-toggle="collapse"
             data-target="#navCollapse"
           >
-            <fa-icon [icon]="menuIcon"  class="fa-md text-danger"></fa-icon>
+            <fa-icon [icon]="menuIcon" class="fa-md text-danger"></fa-icon>
           </button>
         </div>
 
@@ -19,13 +19,25 @@
               href="#"
               class="nav-item  mx-auto text-white"
               routerLink="./library"
+              data-toggle="collapse"
+              data-target="#navCollapse"
             >
               <h5>Library</h5>
             </a>
-            <a href="#" class="nav-item mx-auto text-white">
+            <a
+              href="#"
+              class="nav-item mx-auto text-white"
+              data-toggle="collapse"
+              data-target="#navCollapse"
+            >
               <h5>authors</h5>
             </a>
-            <a href="#" class="nav-item  mx-auto text-white">
+            <a
+              href="#"
+              class="nav-item  mx-auto text-white"
+              data-toggle="collapse"
+              data-target="#navCollapse"
+            >
               <h5>authors</h5>
             </a>
           </div>
@@ -49,8 +61,10 @@
       >
         Log In
       </button>
-      <button class="btn btn-outline text-white w-30  mx-auto"
-      (click)="openDialogForm()">
+      <button
+        class="btn btn-outline text-white w-30  mx-auto"
+        (click)="openDialogForm()"
+      >
         Sign In
       </button>
     </div>

@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { faCheck, faEnvelope, faUser , faMap, faCity, faPhone , faWindowClose} from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { User } from '../shared/models/userModel';
 
 
 @Component({
@@ -32,7 +33,17 @@ export class RegistrationModalComponent implements OnInit {
     this.closeEvent.emit();
   }
 
-  submit() {}
+  // createUser(): User {
+  //   return new User()
+  // }
+
+  submit() {
+    console.log(
+      this.registrationForm.get('name').value
+
+    );
+
+  }
 
 
 

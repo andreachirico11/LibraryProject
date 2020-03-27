@@ -39,13 +39,13 @@ export class AuthenticationService {
 
   handleResponse(res: User) {
     const newUser = new User(
-      res.idUser,
       res.email,
       res.password,
       res.token,
       res.isAdmin,
       res.name,
       res.surname,
+      res.idUser,
       res.phoneNumber,
       res.adress,
       res.imgPath,

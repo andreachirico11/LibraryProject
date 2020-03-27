@@ -21,8 +21,6 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     this.userService.getLoggedUser();
     this.subscription = this.userService.loggedUser.subscribe( logged => {
       this.loggedUser = logged;
-      console.log(this.loggedUser);
-
     });
   }
 }
