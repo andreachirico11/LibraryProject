@@ -15,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { MockInterceptorService } from './shared/mockInterceptors/mockAuth.service';
 import { UserModule } from './user/user.module';
 import { PlaceholderDirective } from './registrationForm/placeholder.directive';
+import { MockCreateUserService } from './shared/mockInterceptors/mockPostUser.service';
 
 
 const routes: Routes = [
@@ -44,6 +45,9 @@ const routes: Routes = [
   providers: [
     {
       provide: HTTP_INTERCEPTORS, useClass: MockInterceptorService, multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS, useClass: MockCreateUserService, multi: true
     }
   ],
   bootstrap: [AppComponent]

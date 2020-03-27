@@ -7,15 +7,16 @@ import {
 } from "@angular/common/http";
 import { of } from "rxjs";
 import { User } from "../models/userModel";
-import { Users } from "../models/mocks";
+import { MockDBService } from './mockDB.service';
 
-Injectable({ providedIn: "root" });
+@Injectable({ providedIn: "root" })
 
 export class MockInterceptorService implements HttpInterceptor {
   rb: string;
-  usResp: string;
   correspondantUser: User = null;
   index: number = -1;
+
+  constructor( private mockDB: MockDBService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler) {
     if ( request.method === "POST" && request.url === "http://localhost:4200/authenticationMock") {
@@ -23,7 +24,7 @@ export class MockInterceptorService implements HttpInterceptor {
       this.correspondantUser = this.searchCorrespondantUser(this.rb);
     }
 
-    if (this.correspondantUser) {
+    if (this. correspondantUser) {
       return of(new HttpResponse({ status: 200, body: this.correspondantUser }));
     }
     return next.handle(request);
@@ -32,11 +33,11 @@ export class MockInterceptorService implements HttpInterceptor {
   searchCorrespondantUser(jsonCredential: string): User {
     let index = -1;
     let foundUser = null;
-    Users.forEach(u => {
+    this.mockDB.userDB.forEach(u => {
       index++;
       const jsonUser = JSON.stringify({ email: u.email, password: u.password });
       if (jsonUser === jsonCredential) {
-        foundUser = Users[index];
+        foundUser = this.mockDB.userDB[index];
       }
     });
     return foundUser;

@@ -1,10 +1,15 @@
-<div class="backdrop" >
+<div class="backdrop">
   <div class="modal-box">
     <div class="container p-5 bg-light">
       <div class="row">
         <h3 class="mb-2">Create a free account!</h3>
-        <hr>
-        <fa-icon [icon]="iconsArray[6]" class="fa-lg text-danger" (click)="close()" style="cursor: pointer;"></fa-icon>
+        <hr />
+        <fa-icon
+          [icon]="iconsArray[6]"
+          class="fa-lg text-danger"
+          (click)="close()"
+          style="cursor: pointer;"
+        ></fa-icon>
       </div>
       <form [formGroup]="registrationForm" (ngSubmit)="submit()">
         <!-- #####################input groups -->
@@ -79,6 +84,7 @@
             formControlName="city"
           />
         </div>
+
         <div class="input-group my-2 has-error">
           <div class="input-group-prepend">
             <span class="input-group-text">
@@ -102,6 +108,20 @@
                 registrationForm.get('phoneNumber').invalid
             }"
           />
+          <div class="input-group my-2">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <fa-icon [icon]="iconsArray[7]"></fa-icon>
+              </span>
+            </div>
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="password"
+              placeholder="New Password"
+              formControlName="password"
+            />
+          </div>
         </div>
 
         <button
