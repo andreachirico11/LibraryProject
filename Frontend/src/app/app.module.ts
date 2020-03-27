@@ -12,8 +12,8 @@ import { RegistrationModalComponent } from './registrationForm/registrationForm.
 import { LibraryModule } from './library/library.module';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { MockInterceptorService } from './shared/authentication/mockInterceptor.service';
-import { AuthenticationService } from './shared/authentication/authentication.service';
+import { MockInterceptorService } from './shared/mockInterceptors/mockAuth.service';
+import { AuthenticationService } from './shared/authentication.service';
 import { CustomValidators } from './shared/customValidators';
 import { UserModule } from './user/user.module';
 

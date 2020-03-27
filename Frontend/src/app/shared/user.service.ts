@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { User } from './userModel';
+import { User } from './models/userModel';
 
 @Injectable({providedIn: 'root'})
 
@@ -12,4 +12,6 @@ export class UserService {
       JSON.parse(localStorage.getItem('loggedUser'))
     );
   }
+
+
 }

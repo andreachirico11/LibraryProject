@@ -6,7 +6,7 @@ import {
   HttpResponse
 } from "@angular/common/http";
 import { of } from "rxjs";
-import { User } from "../userModel";
+import { User } from "../models/userModel";
 
 Injectable({ providedIn: "root" });
 
@@ -72,20 +72,3 @@ const Users = [
     []
   )
 ];
-
-
-
-      // Users.forEach(u => {
-      //   this.index++;
-      //   this.usResp = JSON.stringify({ email: u.email, password: u.password });
-      //   if (this.usResp === this.rb) {
-      //     this.correspondantUser = Users[this.index];
-      //     return of(
-      //       new HttpResponse({ status: 200, body: this.correspondantUser })
-      //     );
-      //   } else {
-      //     return of(
-      //       new HttpResponse({ status: 404, statusText: "WRONG CREDENTIALS" })
-      //     );
-      //   }
-      // });

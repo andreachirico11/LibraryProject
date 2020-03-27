@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, OnDestroy } from '@angular/core';
-import { User } from '../shared/userModel';
+import { User } from '../shared/models/userModel';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { UserService } from '../shared/user.service';
 

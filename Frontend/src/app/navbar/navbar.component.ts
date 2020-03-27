@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { faBars, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FormGroup, FormControl, Validators, NgForm } from "@angular/forms";
-import { AuthenticationService } from "../shared/authentication/authentication.service";
+import { AuthenticationService } from "../shared/authentication.service";
 import { Subscription } from "rxjs";
 import { CustomValidators } from '../shared/customValidators';
 

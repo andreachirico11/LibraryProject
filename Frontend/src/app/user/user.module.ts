@@ -7,9 +7,10 @@ import { UserBorrowedComponent } from './userBorrowedBooks/userBorrowed.componen
 import { UserInfoComponent } from './userInfo/userInfo.component';
 import { UserImgComponent } from './userImg/userImg.component';
 import { UserFavouritesComponent } from './userFavourites/userFavourites.component';
+import { userGuard } from './userGuard.service';
 
 const routes: Routes = [
-  {path: 'user', component: UserComponent, children: [
+  {path: 'user', component: UserComponent, canActivate: [userGuard] , children: [
     {path: 'favourites', component: UserFavouritesComponent},
     {path: 'borrowed', component: UserBorrowedComponent},
     {path: 'info', component: UserInfoComponent}
@@ -30,7 +31,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FontAwesomeModule,
     CommonModule
-  ]
+  ],
+  providers: [userGuard]
 })
 
 export class UserModule {}

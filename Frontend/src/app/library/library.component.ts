@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { dbService } from '../shared/dbActions.service';
-import { BookModel } from '../shared/bookModel';
+import { BookModel } from '../shared/models/bookModel';
 import { Subscription } from 'rxjs';
 import { faBook } from '@fortawesome/free-solid-svg-icons';
 

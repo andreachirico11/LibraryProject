@@ -5,9 +5,9 @@ import {
 } from "@angular/common/http/testing";
 import { dbService } from "./dbActions.service";
 import { environment } from "../../environments/environment";
-import * as mocks from "./mocks";
+import * as mocks from "./models/mocks";
 import { HttpHeaders } from "@angular/common/http";
-import { BookModel } from "./bookModel";
+import { BookModel } from "./models/bookModel";
 
 let databaseService: dbService;
 let httpTestingController: HttpTestingController;
