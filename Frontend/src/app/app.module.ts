@@ -14,6 +14,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { MockInterceptorService } from './shared/authentication/mockInterceptor.service';
 import { AuthenticationService } from './shared/authentication/authentication.service';
+import { CustomValidators } from './shared/customValidators';
+import { UserModule } from './user/user.module';
 
 
 const routes: Routes = [
@@ -36,6 +38,7 @@ const routes: Routes = [
     FontAwesomeModule,
     ReactiveFormsModule,
     LibraryModule,
+    UserModule,
     RouterModule.forRoot(routes)
   ],
   providers: [

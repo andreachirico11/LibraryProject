@@ -3,6 +3,7 @@ import { faBars, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FormGroup, FormControl, Validators, NgForm } from "@angular/forms";
 import { AuthenticationService } from "../shared/authentication/authentication.service";
 import { Subscription } from "rxjs";
+import { CustomValidators } from '../shared/customValidators';
 
 @Component({
   selector: "app-navbar",
@@ -16,8 +17,11 @@ export class NavbarComponent implements OnInit {
   accessForm: FormGroup;
   isLoggedIn = false;
   subscription: Subscription;
+  customValidators = new CustomValidators()
 
-  constructor(private authService: AuthenticationService) {}
+
+  constructor(private authService: AuthenticationService) {
+  }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
@@ -33,8 +37,8 @@ export class NavbarComponent implements OnInit {
       }
     });
     this.accessForm = new FormGroup({
-      email: new FormControl("", [Validators.required, Validators.email]),
-      password: new FormControl("", [Validators.required])
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [Validators.required ])
     });
   }
 
@@ -47,7 +51,11 @@ export class NavbarComponent implements OnInit {
     this.subscription =  this.authService.login(email, password).subscribe();
   }
 
-  logout(){
+  logout() {
     this.authService.logout();
   }
+
+
+
+
 }

@@ -1,0 +1,25 @@
+<section id="head" class="bg-light mt-4">
+  <div class="container">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-md-4">
+        <h1>My Profile</h1>
+      </div>
+      <div class="col-md-4 align-items-right">
+        <div class="btn-group">
+          <button class="btn btn-outline-warning" routerLink="/user/favourites" routerLinkActive="active">Favourite Books</button>
+          <button class="btn btn-outline-warning" routerLink="/user/borrowed" routerLinkActive="active">Borrowed Books</button>
+          <button class="btn btn-outline-warning" routerLink="/user/info" routerLinkActive="active">Personal Info</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-md-8">
+        <router-outlet></router-outlet>
+      </div>
+      <div class="col-md-4">
+        <app-user-img></app-user-img>
+      </div>
+    </div>
+  </div>
+</section>

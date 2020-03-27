@@ -1,8 +1,8 @@
-import { FormControl, AbstractControl } from '@angular/forms';
+import {  AbstractControl, FormControl } from '@angular/forms';
 
 export class CustomValidators {
 
-  constructor(regex: RegExp) {}
+  constructor() {}
 
 
    private regexPatterns =
@@ -13,11 +13,11 @@ export class CustomValidators {
     hasSpecialCaracters: /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{6,}$/g
   }
 
-   passwordValidator(abstracControl: AbstractControl): {[message: string]: boolean} {
+   passwordValidator(abstracControl: FormControl): {[message: string]: boolean} {
     let testResult = null;
     const password = abstracControl.get('password').value;
     if(!password) {
-      return null;
+      return testResult;
     }
    for (const regex in this.regexPatterns) {
     const pattern = this.regexPatterns[regex];
