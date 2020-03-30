@@ -1,5 +1,8 @@
 
-<img [src]="loggedUser.imgPath" alt="" class="img-fluid d-block rounded-circle">
+<img *ngIf="loggedUser.imgPath; else emptyAvatar" [src]="loggedUser.imgPath" alt="../../assets/emptyAvatar.png" class="img-fluid d-block rounded-circle">
+<ng-template #emptyAvatar>
+  <img src="../../assets/emptyAvatar.png" class="img-fluid d-block rounded-circle">
+</ng-template>
 <div class="text-center  mt-5">
 
   <h3 class="text-muted d-block">{{loggedUser.name}} {{loggedUser.surname}}</h3>

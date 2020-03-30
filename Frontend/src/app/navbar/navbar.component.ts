@@ -43,7 +43,7 @@ export class NavbarComponent implements OnInit {
         this.isLoggedIn = false;
       } else {
         this.isLoggedIn = true;
-        this.userName = res.email;
+        this.userName = res.name;
       }
     });
     this.accessForm = new FormGroup({

@@ -19,7 +19,8 @@ import { MockCreateUserService } from './shared/mockInterceptors/mockPostUser.se
 
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', redirectTo: 'home', pathMatch: 'full' },
+  {path: 'home', component: HomeComponent },
   {path: '**', redirectTo: '', pathMatch: 'full'},
 ];
 

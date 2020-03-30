@@ -24,7 +24,7 @@ export class MockInterceptorService implements HttpInterceptor {
       this.correspondantUser = this.searchCorrespondantUser(this.rb);
     }
 
-    if (this. correspondantUser) {
+    if (this.correspondantUser) {
       return of(new HttpResponse({ status: 200, body: this.correspondantUser }));
     }
     return next.handle(request);
