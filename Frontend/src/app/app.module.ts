@@ -16,6 +16,7 @@ import { MockInterceptorService } from './shared/mockInterceptors/mockAuth.servi
 import { UserModule } from './user/user.module';
 import { PlaceholderDirective } from './registrationForm/placeholder.directive';
 import { MockCreateUserService } from './shared/mockInterceptors/mockPostUser.service';
+import { ValidationDirective } from './registrationForm/validation.directive';
 
 
 const routes: Routes = [
@@ -32,7 +33,8 @@ const routes: Routes = [
     NavbarComponent,
     RegistrationModalComponent,
     HomeComponent,
-    PlaceholderDirective
+    PlaceholderDirective,
+    ValidationDirective
   ],
   imports: [
     BrowserModule,

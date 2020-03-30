@@ -14,11 +14,12 @@ import { Validators } from "@angular/forms";
 import { User } from "../shared/models/userModel";
 import { UserService } from "../shared/user.service";
 import { Subscription } from "rxjs";
+import { CustomValidators } from "../shared/customValidators";
 
 @Component({
   selector: "app-registration",
   templateUrl: "./registrationForm.component.html",
-  styleUrls: ["./registration.component.css"]
+  styleUrls: ["./registration.component.css"],
 })
 // styles: ['input.ng-invalid {border: 5px solid red}']
 export class RegistrationModalComponent implements OnInit {
@@ -34,6 +35,7 @@ export class RegistrationModalComponent implements OnInit {
   ];
   registrationForm: FormGroup;
   subscription: Subscription;
+  customValidators  = new CustomValidators;
   @Output() closeEvent = new EventEmitter<void>();
 
   constructor(private userService: UserService) {}
@@ -46,7 +48,7 @@ export class RegistrationModalComponent implements OnInit {
       adress: new FormControl("", [Validators.required]),
       city: new FormControl("", [Validators.required]),
       phoneNumber: new FormControl("", [Validators.required]),
-      password: new FormControl("", Validators.required)
+      password: new FormControl("", [Validators.required, this.customValidators.passwordValidator])
     });
   }
 

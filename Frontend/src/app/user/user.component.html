@@ -17,8 +17,10 @@
       <div class="col-md-8">
         <router-outlet></router-outlet>
       </div>
-      <div class="col-md-4 d-md-block d-sm-none">
-        <app-user-img [loggedUser]="loggedUser"></app-user-img>
+      <div class="col-md-4">
+        <div class=" d-none d-md-block">
+          <app-user-img [loggedUser]="loggedUser"></app-user-img>
+        </div>
       </div>
     </div>
   </div>

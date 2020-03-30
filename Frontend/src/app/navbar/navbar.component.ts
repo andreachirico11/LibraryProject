@@ -8,7 +8,6 @@ import { faBars, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FormGroup, FormControl, Validators, NgForm } from "@angular/forms";
 import { AuthenticationService } from "../shared/authentication.service";
 import { Subscription } from "rxjs";
-import { CustomValidators } from "../shared/customValidators";
 import { RegistrationModalComponent } from "../registrationForm/registrationForm.component";
 import { PlaceholderDirective } from '../registrationForm/placeholder.directive';
 
@@ -24,7 +23,6 @@ export class NavbarComponent implements OnInit {
   accessForm: FormGroup;
   isLoggedIn = false;
   subscription: Subscription;
-  customValidators = new CustomValidators();
   @ViewChild(PlaceholderDirective , { static: false }) formHost: PlaceholderDirective;
   closeFormEvent: Subscription;
 
