@@ -3,21 +3,20 @@ import { NgModule } from '@angular/core';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RegistrationModule } from './registrationForm/registration.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { UserModule } from './user/user.module';
+import { RouterModule, Routes } from '@angular/router';
+import { LibraryModule } from './library/library.module';
 
 import { AppComponent } from './app.component';
 import { BodyComponent } from './body/body.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { RegistrationModalComponent } from './registrationForm/registrationForm.component';
-import { LibraryModule } from './library/library.module';
-import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { MockInterceptorService } from './shared/mockInterceptors/mockAuth.service';
-import { UserModule } from './user/user.module';
-import { PlaceholderDirective } from './registrationForm/placeholder.directive';
-import { MockCreateUserService } from './shared/mockInterceptors/mockPostUser.service';
-import { ValidationDirective } from './registrationForm/validation.directive';
+import { PlaceholderDirective } from './shared/placeholder.directive';
 
+import { MockInterceptorService } from './shared/mockInterceptors/mockAuth.service';
+import { MockCreateUserService } from './shared/mockInterceptors/mockPostUser.service';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -30,11 +29,9 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     BodyComponent,
-    NavbarComponent,
-    RegistrationModalComponent,
     HomeComponent,
+    NavbarComponent,
     PlaceholderDirective,
-    ValidationDirective
   ],
   imports: [
     BrowserModule,
@@ -43,6 +40,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     LibraryModule,
     UserModule,
+    RegistrationModule,
     RouterModule.forRoot(routes)
   ],
   providers: [

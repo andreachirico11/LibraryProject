@@ -9,7 +9,7 @@ import { FormGroup, FormControl, Validators, NgForm } from "@angular/forms";
 import { AuthenticationService } from "../shared/authentication.service";
 import { Subscription } from "rxjs";
 import { RegistrationModalComponent } from "../registrationForm/registrationForm.component";
-import { PlaceholderDirective } from '../registrationForm/placeholder.directive';
+import { PlaceholderDirective } from '../shared/placeholder.directive';
 
 @Component({
   selector: "app-navbar",

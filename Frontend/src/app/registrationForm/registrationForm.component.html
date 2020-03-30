@@ -27,6 +27,7 @@
             formControlName="name"
             bootstrapValidatorAdder
           />
+          <div class="invalid-feedback">Only Letters !!!</div>
         </div>
         <div class="input-group my-2">
           <div class="input-group-prepend">
@@ -42,6 +43,7 @@
             formControlName="surname"
             bootstrapValidatorAdder
           />
+          <div class="invalid-feedback">Only Letters !!!</div>
         </div>
         <div class="input-group my-2">
           <div class="input-group-prepend">
@@ -49,7 +51,6 @@
               <fa-icon [icon]="iconsArray[1]"></fa-icon>
             </span>
           </div>
-          <!-- rendere più complesso il campo della mail -->
           <input
             type="text"
             class="form-control form-control-lg"
@@ -58,6 +59,7 @@
             formControlName="email"
             bootstrapValidatorAdder
           />
+          <div class="invalid-feedback">Invalid mail format</div>
         </div>
         <div class="input-group my-2">
           <div class="input-group-prepend">
@@ -88,9 +90,9 @@
             formControlName="city"
             bootstrapValidatorAdder
           />
+          <div class="invalid-feedback">Only Letters !!!</div>
         </div>
-
-        <div class="input-group my-2 has-error">
+        <div class="input-group my-2">
           <div class="input-group-prepend">
             <span class="input-group-text">
               <fa-icon [icon]="iconsArray[5]"></fa-icon>
@@ -104,6 +106,8 @@
             formControlName="phoneNumber"
             bootstrapValidatorAdder
           />
+          <div class="invalid-feedback"  *ngIf="registrationForm.get('phoneNumber').hasError('onlyNumbers') ">Only Numbers !!!</div>
+          <div class="invalid-feedback">Phone number must be 10 digits</div>
           <div class="input-group my-2">
             <div class="input-group-prepend">
               <span class="input-group-text">
@@ -118,13 +122,37 @@
               formControlName="password"
               bootstrapValidatorAdder
             />
+            <div *ngIf="passwordField.hasError('noNumber')" class="invalid-feedback">At least one Number is required</div>
+            <div *ngIf="passwordField.hasError('noCapitalLetter')" class="invalid-feedback">At least one Capital letter is required</div>
+            <div *ngIf="passwordField.hasError('noSmallLetter')" class="invalid-feedback">At least one Small letter is required</div>
+            <div *ngIf="passwordField.hasError('noSpecialCharacter')" class="invalid-feedback">At least one Special Character is required</div>
+          </div>
+          <div class="input-group my-2">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <fa-icon [icon]="iconsArray[7]"></fa-icon>
+              </span>
+            </div>
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="confirmPassword"
+              placeholder="Confirm Password"
+              formControlName="confirmPassword"
+              bootstrapValidatorAdder
+            />
           </div>
         </div>
+        <br>
+        <div *ngIf="touchedFields('password', 'confirmPassword') && registrationForm.hasError('passwordsDoesntMatch')"  class="text-danger">Passwords must be the same</div>
+        <div *ngIf="touchedFields('name', 'surname') && registrationForm.hasError('name=surname')">Name and Surname must be different</div>
+
 
         <button
           class="btn btn-block btn-outline-success mt-2 "
           type="submit"
           [disabled]="registrationForm.invalid"
+          [ngClass]=""
         >
           <fa-icon [icon]="iconsArray[0]"></fa-icon>
           Submit!!!
