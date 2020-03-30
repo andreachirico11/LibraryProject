@@ -4,3 +4,10 @@ body {
   height: 100%;
   background-image: url("https://source.unsplash.com/Oaqk7qqNh_c/1600x900")
 }
+
+@media screen and (max-width: 600px)
+ {
+    #homeImg.search {
+      background-color: red
+    }
+ }
