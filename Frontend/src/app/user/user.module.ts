@@ -8,6 +8,7 @@ import { UserInfoComponent } from './userInfo/userInfo.component';
 import { UserImgComponent } from './userImg/userImg.component';
 import { UserFavouritesComponent } from './userFavourites/userFavourites.component';
 import { userGuard } from './userGuard.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {path: 'user', component: UserComponent, canActivate: [userGuard] , children: [
@@ -30,7 +31,8 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes),
     FontAwesomeModule,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   providers: [userGuard]
 })

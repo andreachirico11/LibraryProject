@@ -9,8 +9,8 @@ import { catchError, tap } from 'rxjs/operators';
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {
   loggedUser = new BehaviorSubject<User>(null);
-  // authUrl = "http://localhost:4200/authenticationMock";
-  authUrl = environment.connectionStr + "users/auth";
+  authUrl = "http://localhost:4200/authenticationMock";
+  // authUrl = environment.connectionStr + "users/auth";
 
   constructor(private http: HttpClient, private router: Router) {}
 

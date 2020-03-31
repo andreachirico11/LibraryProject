@@ -27,11 +27,10 @@ export class MockCreateUserService implements HttpInterceptor {
 
       if (this.isUserFound) {
         return of(new HttpResponse({ status: 200, body: null }));
-      } else {
-        this.mockDb.addUser(this.userInReqBody);
-        return of(new HttpResponse({ status: 200, body: this.userInReqBody }));
       }
     }
+
+
     return next.handle(request);
   }
 
@@ -52,4 +51,12 @@ export class MockCreateUserService implements HttpInterceptor {
     });
     return foundUser;
   }
+
+  // searchUserById(id: number) {
+  //   this.mockDb.userDB.forEach(user => {
+  //     if(user.idUser === id) {
+  //       return user;
+  //     }
+  //   });
+  // }
 }

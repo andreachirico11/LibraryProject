@@ -10,7 +10,7 @@ export class User {
     public phone?: number,
     public address?: string,
     public imgPath?: string,
-    public favourites?: string[],
-    public borrowed?: string[],
+    public favourites?: number[],
+    public borrowed?: number[],
   ) {}
 }

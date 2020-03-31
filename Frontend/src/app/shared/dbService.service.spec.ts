@@ -3,7 +3,7 @@ import {
   HttpClientTestingModule,
   HttpTestingController
 } from "@angular/common/http/testing";
-import { dbService } from "./dbActions.service";
+import { dbService } from "./books.service";
 import { environment } from "../../environments/environment";
 import * as mocks from "./models/mocks";
 import { HttpHeaders } from "@angular/common/http";
