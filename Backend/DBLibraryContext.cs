@@ -20,6 +20,7 @@ namespace Backend.Models
         public virtual DbSet<Genres> Genres { get; set; }
         public virtual DbSet<Loans> Loans { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<UserFavourites> UserFavourites { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -128,56 +129,78 @@ namespace Backend.Models
 
                 entity.Property(e => e.IdBook).HasColumnName("id_book");
 
-                entity.Property(e => e.IdCustomer).HasColumnName("id_customer");
+                entity.Property(e => e.IdUser).HasColumnName("id_customer");
 
                 entity.HasOne(d => d.IdBookNavigation)
                     .WithMany(p => p.Loans)
                     .HasForeignKey(d => d.IdBook)
                     .OnDelete(DeleteBehavior.ClientSetNull);
 
-                entity.HasOne(d => d.IdCustomerNavigation)
+                entity.HasOne(d => d.IdUserNavigation)
                     .WithMany(p => p.Loans)
-                    .HasForeignKey(d => d.IdCustomer)
+                    .HasForeignKey(d => d.IdUser)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+            });
+
+            modelBuilder.Entity<UserFavourites>(entity =>
+            {
+                entity.HasKey(e => e.IdFav);
+
+                entity.HasIndex(e => e.IdFav)
+                    .IsUnique();
+
+                entity.Property(e => e.IdFav)
+                    .HasColumnName("idFav")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.IdBook).HasColumnName("idBook");
+
+                entity.Property(e => e.IdUser).HasColumnName("idUser");
+
+                entity.HasOne(d => d.IdUserNavigation)
+                    .WithMany(p => p.Favourites)
+                    .HasForeignKey(d => d.IdUser)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(d => d.IdBookNavigation)
+                    .WithMany(p => p.UserFavourites)
+                    .HasForeignKey(d => d.IdBook)
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             modelBuilder.Entity<Users>(entity =>
             {
-                entity.HasKey(e => e.IdCustomer);
-
-                entity.HasIndex(e => e.IdCustomer)
-                    .IsUnique();
-
-                entity.Property(e => e.IdCustomer)
-                    .HasColumnName("id_customer")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.Address).HasColumnName("address");
-
-                entity.Property(e => e.City)
-                    .IsRequired()
-                    .HasColumnName("city");
-
-                entity.Property(e => e.DateJoin)
-                    .IsRequired()
-                    .HasColumnName("date_join")
-                    .HasColumnType("DATETIME");
 
                 entity.Property(e => e.Email)
                     .IsRequired()
                     .HasColumnName("email");
 
+                entity.Property(e => e.Password).HasColumnName("password");
+                
                 entity.Property(e => e.IsAdmin).HasColumnName("isAdmin");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasColumnName("name");
 
-                entity.Property(e => e.Phone).HasColumnName("phone");
-
                 entity.Property(e => e.Surname)
                     .IsRequired()
                     .HasColumnName("surname");
+                
+                entity.HasKey(e => e.IdUser);
+                
+                entity.HasIndex(e => e.IdUser)
+                    .IsUnique();
+
+                entity.Property(e => e.IdUser)
+                    .HasColumnName("idUser")
+                    .ValueGeneratedNever();
+                
+                entity.Property(e => e.Address).HasColumnName("address");
+                
+                entity.Property(e => e.Phone).HasColumnName("phone");
+
+                entity.Property(e => e.ImgPath).HasColumnName("imgPath");
             });
 
             OnModelCreatingPartial(modelBuilder);

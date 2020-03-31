@@ -8,6 +8,7 @@ namespace Backend.Models
         public Books()
         {
             Loans = new HashSet<Loans>();
+            UserFavourites = new HashSet<UserFavourites>();
         }
 
         public long IdBook { get; set; }
@@ -22,6 +23,8 @@ namespace Backend.Models
         public virtual Authors IdAuthorNavigation { get; set; }
         public virtual Genres IdGenreNavigation { get; set; }
         public virtual ICollection<Loans> Loans { get; set; }
+        public virtual ICollection<UserFavourites> UserFavourites { get; set; }
+
 
         public Books(BookDTO newBook, long idGen, long idAuth) 
         {

@@ -1,13 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Backend.Models
 {
-    public partial class Loans
+    public partial class UserFavourites
     {
-        public long IdLoan { get; set; }
-        public byte[] DateStart { get; set; }
-        public byte[] DateReturn { get; set; }
+        public long IdFav { get; set; }
         public long IdUser { get; set; }
         public long IdBook { get; set; }
 

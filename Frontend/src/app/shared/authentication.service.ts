@@ -1,19 +1,22 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { catchError, tap } from "rxjs/operators";
-import { throwError, BehaviorSubject } from "rxjs";
+import { BehaviorSubject, throwError } from "rxjs";
 import { User } from "./models/userModel";
 import { Router } from "@angular/router";
+import { environment } from "../../environments/environment";
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {
   loggedUser = new BehaviorSubject<User>(null);
+  // authUrl = "http://localhost:4200/authenticationMock";
+  authUrl = environment.connectionStr + "users/auth";
 
   constructor(private http: HttpClient, private router: Router) {}
 
   login(email: string, password: string) {
     return this.http
-      .post("http://localhost:4200/authenticationMock", {
+      .post(this.authUrl, {
         email: email,
         password: password
       })
@@ -21,6 +24,8 @@ export class AuthenticationService {
         catchError(this.handleError),
         tap((resData: User) => {
           this.handleResponse(resData);
+          console.log(resData);
+
         })
       );
   }
@@ -46,8 +51,8 @@ export class AuthenticationService {
       res.name,
       res.surname,
       res.idUser,
-      res.phoneNumber,
-      res.adress,
+      res.phone,
+      res.address,
       res.imgPath,
       res.favourites,
       res.borrowed

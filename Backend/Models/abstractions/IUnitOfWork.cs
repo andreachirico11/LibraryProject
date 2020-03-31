@@ -12,5 +12,7 @@ namespace Backend.Models
         Task<List<BookDTO>> GetAllBooks();
         Task<BookDTO> GetBookById(long id);
         Task<bool> InsertBook(BookDTO newBook);
+        Task<UserDTO> FindUserByCredentials(Credentials credentials);
+
     }
 }

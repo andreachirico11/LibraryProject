@@ -14,9 +14,11 @@ namespace Backend.Models
         DBLibraryContext context = new DBLibraryContext();
 
         public IBooksRepository BooksRepo { get; set; }
-        public EfUnitOfWork(IBooksRepository bookR) 
+        public IUserRepository UserRepo { get; set; }
+        public EfUnitOfWork(IBooksRepository bookR, IUserRepository userR) 
         {
             this.BooksRepo = bookR;
+            this.UserRepo = userR;
         }
 
 
@@ -39,7 +41,10 @@ namespace Backend.Models
 
 
 
-
+         public Task<UserDTO> FindUserByCredentials(Credentials credentials)
+         {
+             return this.UserRepo.FindUserByCredentials(credentials);
+         }
 
 
 

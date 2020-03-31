@@ -8,18 +8,20 @@ namespace Backend.Models
         public Users()
         {
             Loans = new HashSet<Loans>();
+            Favourites = new HashSet<UserFavourites>();
         }
-
-        public long IdCustomer { get; set; }
+        public string Email { get; set; }
+        public string? Password { get; set; }
+        public long? IsAdmin { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string Address { get; set; }
-        public string City { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
-        public byte[] DateJoin { get; set; }
-        public long? IsAdmin { get; set; }
 
-        public virtual ICollection<Loans> Loans { get; set; }
+        public long IdUser { get; set; }
+        public string? Address { get; set; }
+        public string? Phone { get; set; }
+        public string? ImgPath { get; set; }
+
+        public virtual ICollection<Loans>? Loans { get; set; }
+        public virtual ICollection<UserFavourites>? Favourites  { get; set; }
     }
 }
