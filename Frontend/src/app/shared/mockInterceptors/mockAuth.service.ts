@@ -3,7 +3,8 @@ import {
   HttpInterceptor,
   HttpRequest,
   HttpHandler,
-  HttpResponse
+  HttpResponse,
+  HttpErrorResponse
 } from "@angular/common/http";
 import { of } from "rxjs";
 import { User } from "../models/userModel";

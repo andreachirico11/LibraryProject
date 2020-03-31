@@ -56,8 +56,7 @@
     >
       <button
         class="btn btn-outline text-white w-30 mx-auto"
-        data-toggle="collapse"
-        data-target="#loginCollapse"
+        (click)="openLoginForm()"
       >
         Log In
       </button>
@@ -92,7 +91,7 @@
 
   <!-- >>>>>>>>>>>>>>>>>>>LOGIN FORM -->
 
-  <div class="row mt-2 w-100 m-0 p-0 collapse" id="loginCollapse">
+  <div class="row mt-2 w-100 m-0 p-0 collapse" id="loginCollapse" [ngClass]="{'show': toggleLogin}">
     <div class="col-md-5 offset-md-7">
       <form class="form-inline" [formGroup]="accessForm" (ngSubmit)="login()">
         <input
@@ -108,11 +107,10 @@
         <button
           class="btn btn-outline-danger  w-100"
           type="submit"
-          data-toggle="collapse"
-          data-target="#loginCollapse"
-        >
+          >
           Submit
         </button>
+        <div *ngIf="userNotFound" class="alert alert-warning w-100 alert-block">Wrong Email Or Password</div>
       </form>
     </div>
   </div>

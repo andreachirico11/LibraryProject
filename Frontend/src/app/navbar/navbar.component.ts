@@ -2,14 +2,15 @@ import {
   Component,
   OnInit,
   ComponentFactoryResolver,
-  ViewChild
+  ViewChild,
+  ElementRef
 } from "@angular/core";
 import { faBars, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FormGroup, FormControl, Validators, NgForm } from "@angular/forms";
 import { AuthenticationService } from "../shared/authentication.service";
 import { Subscription } from "rxjs";
 import { RegistrationModalComponent } from "../registrationForm/registrationForm.component";
-import { PlaceholderDirective } from '../shared/placeholder.directive';
+import { PlaceholderDirective } from "../shared/placeholder.directive";
 
 @Component({
   selector: "app-navbar",
@@ -23,8 +24,10 @@ export class NavbarComponent implements OnInit {
   accessForm: FormGroup;
   isLoggedIn = false;
   subscription: Subscription;
-  @ViewChild(PlaceholderDirective , { static: false }) formHost: PlaceholderDirective;
+  @ViewChild(PlaceholderDirective, { static: false }) formHost: PlaceholderDirective;
   closeFormEvent: Subscription;
+  userNotFound = false;
+  toggleLogin = false;
 
   constructor(
     private authService: AuthenticationService,
@@ -56,11 +59,24 @@ export class NavbarComponent implements OnInit {
     }
     const email = this.accessForm.get("email").value;
     const password = this.accessForm.get("password").value;
-    this.subscription = this.authService.login(email, password).subscribe();
+    this.subscription = this.authService
+      .login(email, password)
+      .subscribe(res =>{
+        if (res === null) {
+          this.userNotFound = true
+        } else {
+            this.userNotFound = false;
+            this.toggleLogin = false;
+        }
+      });
   }
 
   logout() {
     this.authService.logout();
+  }
+
+  openLoginForm() {
+    this.toggleLogin = !this.toggleLogin;
   }
 
   openDialogForm() {
@@ -69,9 +85,11 @@ export class NavbarComponent implements OnInit {
     );
     const view = this.formHost.viewContainerRef;
     const createdFormComponent = view.createComponent(formFactory);
-    this.closeFormEvent = createdFormComponent.instance.closeEvent.subscribe(() => {
-      this.closeFormEvent.unsubscribe();
-      view.clear();
-    })
+    this.closeFormEvent = createdFormComponent.instance.closeEvent.subscribe(
+      () => {
+        this.closeFormEvent.unsubscribe();
+        view.clear();
+      }
+    );
   }
 }

@@ -24,8 +24,6 @@ export class AuthenticationService {
         catchError(this.handleError),
         tap((resData: User) => {
           this.handleResponse(resData);
-          console.log(resData);
-
         })
       );
   }
@@ -38,11 +36,15 @@ export class AuthenticationService {
   }
 
   handleError(res: HttpErrorResponse) {
-    console.log(res);
+    console.error(res.message)
+    alert("Wrong Usermail or Password")
     return throwError("errore");
   }
 
   handleResponse(res: User) {
+    if(res == null) {
+      return null;
+    }
     const newUser = new User(
       res.email,
       res.password,
