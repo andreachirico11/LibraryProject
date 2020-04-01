@@ -1,8 +1,8 @@
 
 <ul class="list-group mb-5">
-  <li class="list-group-item">{{loggedUser.address}}</li>
-  <li class="list-group-item">{{loggedUser.phone}}</li>
-  <li class="list-group-item">{{loggedUser.email}}</li>
+  <li *ngIf="loggedUser.address" class="list-group-item">{{loggedUser.address}}</li>
+  <li *ngIf="loggedUser.phone" class="list-group-item">{{loggedUser.phone}}</li>
+  <li *ngIf="loggedUser.email" class="list-group-item">{{loggedUser.email}}</li>
   <li *ngIf="loggedUser.isAdmin === true" class="list-group-item">Admin</li>
   <li *ngIf="loggedUser.isAdmin === false" class="list-group-item">Common User</li>
 </ul>

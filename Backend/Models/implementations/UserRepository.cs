@@ -48,11 +48,16 @@ namespace Backend.Models
         {
             try
             {
+                // Task<List<long>> favourites = Context.UserFavourites
+                //                                 .Where( uf => uf.IdUser == id )
+                //                                 .Select( uf => uf.IdBook)
+                //                                 .ToListAsync();
+                
                 Task<UserDTO> foundUser;
                 foundUser = Context.Users
                             .Where(u => u.IdUser == id)
                             .Select(u => new UserDTO(u))
-                            .FirstOrDefaultAsync();
+                            .FirstOrDefaultAsync();                
                 return foundUser;
 
             }

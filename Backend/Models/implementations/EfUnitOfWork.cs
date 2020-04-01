@@ -15,10 +15,12 @@ namespace Backend.Models
 
         public IBooksRepository BooksRepo { get; set; }
         public IUserRepository UserRepo { get; set; }
-        public EfUnitOfWork(IBooksRepository bookR, IUserRepository userR) 
+        public IUserFavouritesRepository UserFavRepo { get; set; }
+        public EfUnitOfWork(IBooksRepository bookR, IUserRepository userR, IUserFavouritesRepository userFav) 
         {
             this.BooksRepo = bookR;
             this.UserRepo = userR;
+            this.UserFavRepo = userFav;
         }
 
 
@@ -49,6 +51,12 @@ namespace Backend.Models
         public Task<UserDTO> GetUserById(long id)
         {
             return this.UserRepo.GetUserById(id);
+        }
+
+
+        public Task<int> AddBookToUserFavourites(BookAndUserIds bookAndUser)
+        {
+            return this.UserFavRepo.addBookToUserFavourites(bookAndUser);
         }
 
 

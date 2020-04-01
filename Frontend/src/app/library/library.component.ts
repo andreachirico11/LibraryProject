@@ -38,4 +38,8 @@ export class LibraryComponent implements OnInit, OnDestroy {
       u => this.userLogged = u
     );
   }
+
+  addBookToFavourites(id: number) {
+    this.favBookService.addToFavourite(id);
+  }
 }

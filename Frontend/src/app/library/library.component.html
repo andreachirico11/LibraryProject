@@ -40,7 +40,9 @@
           >
             <div class="col-md-6" [ngClass]="{ 'order-2': i % 2 !== 0 }"></div>
             <div class="col-md-6" [ngClass]="{ 'order-1': i % 2 !== 0 }">
-              <button class="btn btn-outline-dark">Add To Favourites</button>
+              <button class="btn btn-outline-dark"
+              (click)="addBookToFavourites(book.idBook)"
+              >Add To Favourites</button>
               <button class="btn btn-outline-dark">Borrow</button>
             </div>
           </div>
