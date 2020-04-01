@@ -15,7 +15,7 @@ export class FavouriteBookService {
     .pipe(
       tap( resp => {
         if(resp === true) {
-          this.userService.refreshUser();
+          // this.userService.refreshUser();
         }
       })
     );

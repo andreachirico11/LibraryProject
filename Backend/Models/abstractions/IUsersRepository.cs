@@ -11,5 +11,6 @@ namespace Backend.Models
         DBLibraryContext Context {get; set; }
         Task<UserDTO> InsertNewUser(UserDTO newUser); 
         Task<UserDTO> FindUserByCredentials(Credentials credentials);
+        Task<UserDTO> GetUserById(long id);
     }
 }

@@ -14,12 +14,12 @@ namespace Backend.Models
             this.Context = ctx;
         }
 
-        
+
         public Task<UserDTO> InsertNewUser(UserDTO newUser)
         {
             throw new NotImplementedException();
         }
-        public  Task<UserDTO> FindUserByCredentials(Credentials credential)
+        public Task<UserDTO> FindUserByCredentials(Credentials credential)
         {
             try
             {
@@ -30,9 +30,9 @@ namespace Backend.Models
                            .FirstOrDefaultAsync();
                 if (user != null)
                 {
-                    return user; 
-                } 
-                else 
+                    return user;
+                }
+                else
                 {
                     return null;
                 }
@@ -44,11 +44,30 @@ namespace Backend.Models
             }
         }
 
+        public Task<UserDTO> GetUserById(long id)
+        {
+            try
+            {
+                Task<UserDTO> foundUser;
+                foundUser = Context.Users
+                            .Where(u => u.IdUser == id)
+                            .Select(u => new UserDTO(u))
+                            .FirstOrDefaultAsync();
+                return foundUser;
+
+            }
+            catch
+            {
+                Console.WriteLine("getuserbyid error");
+                throw;
+            }
+        }
+
     }
 
     public class Credentials
     {
         public string Password { get; set; }
-        public string Email { get; set; } 
+        public string Email { get; set; }
     }
 }

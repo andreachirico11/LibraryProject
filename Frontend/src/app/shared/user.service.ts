@@ -1,22 +1,24 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 import { User } from "./models/userModel";
-import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { take } from "rxjs/operators";
 import { Router } from "@angular/router";
-import { AuthenticationService } from "./authentication.service";
+
+import { environment } from "../../environments/environment";
+
 
 @Injectable({ providedIn: "root" })
 export class UserService {
+  private connString = environment.connectionStr + "users";
   private loggedUserLocal : User
-  loggedUser = new BehaviorSubject<User>(null);
+  public loggedUser = new BehaviorSubject<User>(null);
   private mockConnStr = "http://localhost:4200/postUserMock";
   private head = new HttpHeaders({ "Content-Type": "application/json" });
 
   constructor(
     private http: HttpClient,
-    private router: Router,
-    private authService: AuthenticationService
+    private router: Router
   ) {}
 
   getLoggedUser() {
@@ -26,11 +28,10 @@ export class UserService {
   refreshUser() {
     const id = this.loggedUserLocal.idUser;
     this.http
-      .get(this.mockConnStr, )
+      .get(this.connString + '/' + id)
       .pipe(take(1))
-      .subscribe((res: string) => {
-        localStorage.setItem("loggedUser", res);
-        this.authService.loggedUser.next(JSON.parse(res));
+      .subscribe((res: User) => {
+        this.setUser(res);
       });
   }
 
@@ -45,7 +46,7 @@ export class UserService {
           if (res) {
             localStorage.setItem("loggedUser", res);
             this.loggedUserLocal = JSON.parse(res);
-            this.authService.loggedUser.next(this.loggedUserLocal);
+            this.loggedUser.next(this.loggedUserLocal);
             callResult.next(true);
           }
           this.router.navigate(["/home"]);
@@ -54,5 +55,18 @@ export class UserService {
         error => console.log("sendNewUserError")
       );
     return callResult;
+  }
+
+  setUser(returnedLoggedUser: User) {
+    this.loggedUserLocal = returnedLoggedUser;
+    this.loggedUser.next(this.loggedUserLocal);
+    localStorage.setItem("loggedUser", JSON.stringify(returnedLoggedUser));
+  }
+
+  clearUser() {
+    localStorage.clear();
+    this.loggedUserLocal = null;
+    this.loggedUser.next(null);
+    this.router.navigate([""]);
   }
 }

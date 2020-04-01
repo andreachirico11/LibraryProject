@@ -11,6 +11,7 @@ import { AuthenticationService } from "../shared/authentication.service";
 import { Subscription } from "rxjs";
 import { RegistrationModalComponent } from "../registrationForm/registrationForm.component";
 import { PlaceholderDirective } from "../shared/placeholder.directive";
+import { UserService } from '../shared/user.service';
 
 @Component({
   selector: "app-navbar",
@@ -31,7 +32,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private authService: AuthenticationService,
-    private componentFactoryResolver: ComponentFactoryResolver
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private userService: UserService
   ) {}
 
   ngOnDestroy() {
@@ -39,7 +41,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.loggedUser.subscribe(res => {
+    this.userService.loggedUser.subscribe(res => {
       if (res === null) {
         this.isLoggedIn = false;
       } else {

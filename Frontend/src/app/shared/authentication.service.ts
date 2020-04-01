@@ -1,18 +1,18 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { BehaviorSubject, throwError } from "rxjs";
+import { throwError } from "rxjs";
 import { User } from "./models/userModel";
 import { Router } from "@angular/router";
 import { environment } from "../../environments/environment";
 import { catchError, tap } from 'rxjs/operators';
+import { UserService } from './user.service';
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {
-  loggedUser = new BehaviorSubject<User>(null);
-  authUrl = "http://localhost:4200/authenticationMock";
-  // authUrl = environment.connectionStr + "users/auth";
+  // authUrl = "http://localhost:4200/authenticationMock";
+  authUrl = environment.connectionStr + "users/auth";
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router,private userService: UserService) {}
 
   login(email: string, password: string) {
     return this.http
@@ -29,9 +29,9 @@ export class AuthenticationService {
   }
 
   autoLogin() {
-    const localStoredUser = JSON.parse(localStorage.getItem("loggedUser"));
+    const localStoredUser = localStorage.getItem("loggedUser");
     if (localStoredUser) {
-      this.loggedUser.next(localStoredUser);
+       this.userService.setUser(JSON.parse(localStoredUser));
     }
   }
 
@@ -59,13 +59,10 @@ export class AuthenticationService {
       res.favourites,
       res.borrowed
     );
-    this.loggedUser.next(newUser);
-    localStorage.setItem("loggedUser", JSON.stringify(newUser));
+    this.userService.setUser(newUser);
   }
 
   logout() {
-    localStorage.clear();
-    this.loggedUser.next(null);
-    this.router.navigate([""]);
+    this.userService.clearUser();
   }
 }

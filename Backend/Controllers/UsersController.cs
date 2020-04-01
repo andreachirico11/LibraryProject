@@ -22,5 +22,10 @@ namespace Backend.Controllers
         {
             return await unitOfWork.FindUserByCredentials(credentials);
         }
+        [HttpGet("{id}")]
+        public async Task<UserDTO> GetuserById(long id)
+        {
+            return await unitOfWork.GetUserById(id);
+        }
     }
 }

@@ -12,7 +12,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('logged user is: ' + localStorage.getItem('loggedUser'));
     this.authServ.autoLogin();
   }
 }

@@ -45,7 +45,11 @@ namespace Backend.Models
          {
              return this.UserRepo.FindUserByCredentials(credentials);
          }
-
+        
+        public Task<UserDTO> GetUserById(long id)
+        {
+            return this.UserRepo.GetUserById(id);
+        }
 
 
 
