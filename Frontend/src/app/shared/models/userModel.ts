@@ -1,3 +1,5 @@
+import { BookModel } from './bookModel';
+
 export class User {
   constructor(
     public email: string,
@@ -10,7 +12,7 @@ export class User {
     public phone?: number,
     public address?: string,
     public imgPath?: string,
-    public favourites?: number[],
+    public favourites?: BookModel[],
     public borrowed?: number[],
   ) {}
 }

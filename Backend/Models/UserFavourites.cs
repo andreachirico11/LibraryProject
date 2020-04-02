@@ -19,6 +19,9 @@ namespace Backend.Models
 
         public virtual Books IdBookNavigation { get; set; }
         public virtual Users IdUserNavigation { get; set; }
+
+        
     }
     
+
 }

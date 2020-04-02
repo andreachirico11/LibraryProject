@@ -22,6 +22,7 @@ namespace Backend.Controllers
         [HttpPost("add")]
         public async Task<int> AddBookToUserFavourites(BookAndUserIds bookAndUser)
         {
+            Console.WriteLine("sonoqua");
             return await this.unitOfWork.AddBookToUserFavourites(bookAndUser);
         }
     }

@@ -14,12 +14,12 @@ namespace Backend.Models
             this.context = ctx;
         }
 
-        public bool VerifyIfBookIsAlreadyInFavourites(long idBook, long idUser)
+        public async Task<bool> VerifyIfBookIsAlreadyInFavourites(long idBook, long idUser)
         {
             UserFavourites foundRelation = null;
-            foundRelation = context.UserFavourites
-            .Where(uf => uf.IdUser == idUser && uf.IdBook == idBook)
-            .FirstOrDefault();
+            foundRelation = await context.UserFavourites
+                                        .Where(uf => uf.IdUser == idUser && uf.IdBook == idBook)
+                                        .FirstOrDefaultAsync();
             return foundRelation != null ? true : false;
         }
 
@@ -33,7 +33,7 @@ namespace Backend.Models
 
         public async Task<int> addBookToUserFavourites(BookAndUserIds bookAndUser)
         {
-            bool alreadyInserted = this.VerifyIfBookIsAlreadyInFavourites(bookAndUser.idBook, bookAndUser.idUser);
+            bool alreadyInserted = await this.VerifyIfBookIsAlreadyInFavourites(bookAndUser.idBook, bookAndUser.idUser);
             if (alreadyInserted == false)
             {
                 var maxId = await this.getMaxId() + 1;

@@ -13,11 +13,13 @@ public class UserDTO
     public string? Phone { get; set; }
     public string? ImgPath { get; set; }
     public ICollection<Loans>? Loans { get; set; }
-    public ICollection<UserFavourites>? Favourites { get; set; }
+    // public ICollection<UserFavourites>? Favourites { get; set; }
+    public ICollection<BookDTO>? Favourites { get; set; }
 
-    public UserDTO() {}
+    public UserDTO() { }
 
-    public UserDTO(Users user) {
+    public UserDTO(Users user, List<BookDTO> usFav)
+    {
         this.Email = user.Email;
         this.Password = user.Password;
         this.IsAdmin = user.IsAdmin == 0 ? false : true;
@@ -28,6 +30,14 @@ public class UserDTO
         this.Phone = user.Phone;
         this.ImgPath = user.ImgPath;
         this.Loans = user.Loans;
-        this.Favourites = user.Favourites;
+        this.Favourites = usFav;
+
+
+        // this.Favourites = new List<BookDTO>();
+        // foreach (var usFav in user.Favourites)
+        // {
+        //     var foundBook = new BookDTO(usFav.IdBookNavigation, v.IdBookNavigation.IdGenre);
+        //     this.Favourites.Add(foundBook);
+        // }
     }
 }

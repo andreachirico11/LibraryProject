@@ -5,7 +5,7 @@ import { Subscription } from "rxjs";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
 import { FavouriteBookService } from "../shared/favouritesBook.service";
 import { UserService } from "../shared/user.service";
-import { User } from '../shared/models/userModel';
+import { User } from "../shared/models/userModel";
 
 @Component({
   selector: "app-library",
@@ -26,20 +26,20 @@ export class LibraryComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnDestroy() {
-    this.dbSubs.unsubscribe();
     this.userSub.unsubscribe();
+    this.dbSubs.unsubscribe();
   }
 
   ngOnInit() {
-    this.dbSubs = this.dbservice.getAllBooks().subscribe((r: BookModel[]) => {
-      this.libraryDb = [...this.libraryDb, ...r];
-    });
-    this.userSub = this.userService.loggedUser.subscribe(
-      u => this.userLogged = u
-    );
+    this.getAllBooks();
+    this.userSub = this.userService.loggedUser.subscribe(u => this.getAllBooks());
   }
 
-  addBookToFavourites(id: number) {
-    this.favBookService.addToFavourite(id);
+  getAllBooks() {
+    this.dbSubs = this.dbservice
+    .getAllBooks()
+    .subscribe((books: BookModel[]) => {
+      this.libraryDb = books;
+    });
   }
 }

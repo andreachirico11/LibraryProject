@@ -9,7 +9,17 @@ export class BookModel {
   public description: string,
   public isbn: number,
   public loans: string [],
-  public imagePath: string
+  public imagePath: string,
+  public isFav?: boolean,
+  public isLoaned?: boolean
   ) {}
 
 }
+
+// export class BookModelWithFavAndLoans {
+//   constructor(
+//     public bookInfo : BookModel,
+//     public isFav: boolean,
+//     public isLoaned? : boolean
+//     ) {}
+// }

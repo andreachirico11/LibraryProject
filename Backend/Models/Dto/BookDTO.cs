@@ -20,4 +20,14 @@ public class BookDTO {
             this.Description = book.Description;
             this.Isbn = book.Isbn;
         }
+        public BookDTO(Books book) {
+            this.IdBook = book.IdBook;
+            this.Title = book.Title;
+            this.Editor = book.Editor;
+            this.PublishingYear = book.PublishingYear;
+           
+            // this.Author = author.Name + " " + author.Surname;
+            this.Description = book.Description;
+            this.Isbn = book.Isbn;
+        }
 }

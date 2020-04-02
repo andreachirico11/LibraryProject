@@ -11,7 +11,7 @@ import { environment } from "../../environments/environment";
 @Injectable({ providedIn: "root" })
 export class UserService {
   private connString = environment.connectionStr + "users";
-  private loggedUserLocal : User
+  public loggedUserLocal : User
   public loggedUser = new BehaviorSubject<User>(null);
   private mockConnStr = "http://localhost:4200/postUserMock";
   private head = new HttpHeaders({ "Content-Type": "application/json" });

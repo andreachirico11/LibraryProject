@@ -19,9 +19,9 @@
         <!-- ####################################### COL 2 -->
         <div class="col-md-4 py-5 " [ngClass]="{ 'order-md-2': i % 2 !== 0 }">
           <div class="media-body font-italic">
-            <h4 class="font-weight-bold">{{ book.title }}</h4>
-            by {{ book.author }}
-            <h6>{{ book.editor }}</h6>
+            <h4 class="font-weight-bold">{{book.title }}</h4>
+            by {{book.author }}
+            <h6>{{book.editor }}</h6>
           </div>
           <div *ngIf="" class="alert alert-success align-items-end">
             <fa-icon [icon]="bookIcon" class="mr-2"></fa-icon>
@@ -40,10 +40,16 @@
           >
             <div class="col-md-6" [ngClass]="{ 'order-2': i % 2 !== 0 }"></div>
             <div class="col-md-6" [ngClass]="{ 'order-1': i % 2 !== 0 }">
-              <button class="btn btn-outline-dark"
-              (click)="addBookToFavourites(book.idBook)"
+
+              <button class="btn btn-outline-dark" *ngIf="book.isFav == false"
               >Add To Favourites</button>
-              <button class="btn btn-outline-dark">Borrow</button>
+              <button class="btn btn-outline-success disabled" *ngIf="book.isFav == true"
+              >Favourites !</button>
+
+              <button class="btn btn-outline-dark" *ngIf="book.isLoaned == false"
+              >Borrow</button>
+              <button class="btn btn-outline-dark" *ngIf="book.isLoaned == true"
+              >Borrowed</button>
             </div>
           </div>
         </div>

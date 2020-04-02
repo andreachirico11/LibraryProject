@@ -7,7 +7,7 @@ namespace Backend.Models
     public interface IUserFavouritesRepository
     {
         DBLibraryContext context { get; set; }
-         bool VerifyIfBookIsAlreadyInFavourites(long idBook, long idUser);
+         Task<bool> VerifyIfBookIsAlreadyInFavourites(long idBook, long idUser);
          Task<long> getMaxId();
          Task<int> addBookToUserFavourites(BookAndUserIds bookAndUser);
         

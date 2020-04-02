@@ -32,6 +32,7 @@ export class AuthenticationService {
     const localStoredUser = localStorage.getItem("loggedUser");
     if (localStoredUser) {
        this.userService.setUser(JSON.parse(localStoredUser));
+
     }
   }
 

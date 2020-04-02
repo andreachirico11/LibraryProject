@@ -18,41 +18,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr *ngFor="let book of loggedUser.favourites">
               <td>
-                <img src="https://source.unsplash.com/random/100x150" />
+                <img [src]="book.imagePath" />
               </td>
-              <td>Titolo</td>
-              <td>Autore</td>
-              <td>Editore</td>
-              <td>Genre</td>
-            </tr>
-            <tr>
-              <td>
-                <img src="https://source.unsplash.com/random/101x150" />
-              </td>
-              <td>Titolo</td>
-              <td>Autore</td>
-              <td>Editore</td>
-              <td>Genre</td>
-            </tr>
-            <tr>
-              <td>
-                <img src="https://source.unsplash.com/random/102x150" />
-              </td>
-              <td>Titolo</td>
-              <td>Autore</td>
-              <td>Editore</td>
-              <td>Genre</td>
-            </tr>
-            <tr>
-              <td>
-                <img src="https://source.unsplash.com/random/103x150" />
-              </td>
-              <td>Titolo</td>
-              <td>Autore</td>
-              <td>Editore</td>
-              <td>Genre</td>
+              <td>{{ book.title }}</td>
+              <td>{{ book.author }}</td>
+              <td>{{ book.editor }}</td>
+              <td>{{ book.genre }}</td>
             </tr>
           </tbody>
         </table>

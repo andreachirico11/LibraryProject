@@ -9,9 +9,11 @@ namespace Backend.Models
     public class UserRepository : IUserRepository
     {
         public DBLibraryContext Context { get; set; }
-        public UserRepository(DBLibraryContext ctx)
+        public IBooksRepository BookRepo { get; set; }
+        public UserRepository(DBLibraryContext ctx, IBooksRepository bookr)
         {
             this.Context = ctx;
+            this.BookRepo = bookr;
         }
 
 
@@ -19,18 +21,19 @@ namespace Backend.Models
         {
             throw new NotImplementedException();
         }
-        public Task<UserDTO> FindUserByCredentials(Credentials credential)
+        public async Task<UserDTO> FindUserByCredentials(Credentials credential)
         {
             try
             {
-                Task<UserDTO> user;
-                user = Context.Users
+               
+                var user = await Context.Users
                            .Where(u => u.Password == credential.Password && u.Email == credential.Email)
-                           .Select(u => new UserDTO(u))
                            .FirstOrDefaultAsync();
+
                 if (user != null)
                 {
-                    return user;
+                    return await this.GetUserById(user.IdUser);
+                    // return user;
                 }
                 else
                 {
@@ -44,22 +47,23 @@ namespace Backend.Models
             }
         }
 
-        public Task<UserDTO> GetUserById(long id)
+        public async Task<UserDTO> GetUserById(long id)
         {
             try
             {
-                // Task<List<long>> favourites = Context.UserFavourites
-                //                                 .Where( uf => uf.IdUser == id )
-                //                                 .Select( uf => uf.IdBook)
-                //                                 .ToListAsync();
-                
-                Task<UserDTO> foundUser;
-                foundUser = Context.Users
+                var foundUser = await Context.Users
                             .Where(u => u.IdUser == id)
-                            .Select(u => new UserDTO(u))
-                            .FirstOrDefaultAsync();                
-                return foundUser;
+                            .Include(u => u.Favourites)
+                            .FirstOrDefaultAsync();
+                var favBooks = new List<BookDTO>();
 
+                foreach (var UsFav in foundUser.Favourites)
+                {
+                    BookDTO book = await this.BookRepo.GetBookById(UsFav.IdBook);
+                    favBooks.Add(book);
+                }
+                
+                return new UserDTO(foundUser, favBooks);
             }
             catch
             {
@@ -67,6 +71,25 @@ namespace Backend.Models
                 throw;
             }
         }
+        // public async Task<UserDTO> GetUserById(long id)
+        // {
+        //     try
+        //     {
+        //         var foundUser = await Context.Users
+        //                     .Where(u => u.IdUser == id)
+        //                     .Include( u => u.Favourites)
+        //                     .ThenInclude(uf => uf.IdBookNavigation)
+        //                     .FirstOrDefaultAsync();
+        //         return new UserDTO(foundUser);
+        //     }
+        //     catch
+        //     {
+        //         Console.WriteLine("getuserbyid error");
+        //         throw;
+        //     }
+        // }
+
+
 
     }
 
