@@ -129,7 +129,7 @@ namespace Backend.Models
 
                 entity.Property(e => e.IdBook).HasColumnName("id_book");
 
-                entity.Property(e => e.IdUser).HasColumnName("id_customer");
+                entity.Property(e => e.IdUser).HasColumnName("id_user");
 
                 entity.HasOne(d => d.IdBookNavigation)
                     .WithMany(p => p.Loans)

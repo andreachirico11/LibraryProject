@@ -31,6 +31,13 @@ namespace Backend.Models
                                 .FirstOrDefaultAsync();
         }
 
+        public async Task<UserFavourites> GetUserFav(BookAndUserIds bookAndUser)
+        {
+            return await this.context.UserFavourites
+                                    .Where(uf => uf.IdUser == bookAndUser.idUser && uf.IdBook == bookAndUser.idBook)    
+                                    .FirstOrDefaultAsync();
+        }
+
         public async Task<int> addBookToUserFavourites(BookAndUserIds bookAndUser)
         {
             bool alreadyInserted = await this.VerifyIfBookIsAlreadyInFavourites(bookAndUser.idBook, bookAndUser.idUser);
@@ -44,6 +51,23 @@ namespace Backend.Models
             {
                 return await this.context.SaveChangesAsync();
             }
+        }
+
+        public async Task<int> RemoveBookFromUserFavourites(BookAndUserIds bookAndUser)
+        {
+            bool isInserted = await this.VerifyIfBookIsAlreadyInFavourites(bookAndUser.idBook, bookAndUser.idUser);
+            if (isInserted == true)
+            {
+                
+                var usFavToRemove = await this.GetUserFav(bookAndUser);
+                context.Remove(usFavToRemove);
+                return await this.context.SaveChangesAsync();
+            }
+            else
+            {
+                return await this.context.SaveChangesAsync();
+            }
+
         }
 
 

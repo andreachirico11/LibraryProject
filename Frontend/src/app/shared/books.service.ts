@@ -17,7 +17,7 @@ export class dbService {
       }),
       map((books: BookModel[]) => {
         if (this.userService.loggedUserLocal) {
-          this.addFavouritesOrNot(books);
+          this.addIfIsFav(books);
         }
         return books;
       })
@@ -28,6 +28,8 @@ export class dbService {
   getBookById(id: number) {
     return this.http.get<BookModel>(environment.connectionStr + "books/" + id);
   }
+
+
 
 
 
@@ -46,7 +48,7 @@ export class dbService {
     return books;
   }
 
-  addFavouritesOrNot(books: BookModel[]) {
+  addIfIsFav(books: BookModel[]) {
     return books.forEach(book => {
       this.isFavourite(book);
     });
@@ -63,7 +65,30 @@ export class dbService {
       }
       return book;
     }
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // postBook(newBook: BookModel) {
   //   var jsonBook = JSON.stringify(newBook);

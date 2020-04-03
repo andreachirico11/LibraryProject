@@ -71,23 +71,6 @@ namespace Backend.Models
                 throw;
             }
         }
-        // public async Task<UserDTO> GetUserById(long id)
-        // {
-        //     try
-        //     {
-        //         var foundUser = await Context.Users
-        //                     .Where(u => u.IdUser == id)
-        //                     .Include( u => u.Favourites)
-        //                     .ThenInclude(uf => uf.IdBookNavigation)
-        //                     .FirstOrDefaultAsync();
-        //         return new UserDTO(foundUser);
-        //     }
-        //     catch
-        //     {
-        //         Console.WriteLine("getuserbyid error");
-        //         throw;
-        //     }
-        // }
 
 
 

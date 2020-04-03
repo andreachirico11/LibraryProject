@@ -17,6 +17,9 @@ namespace Backend.Models
         Task<UserDTO> FindUserByCredentials(Credentials credentials);
         Task<UserDTO> GetUserById(long id);
         Task<int> AddBookToUserFavourites(BookAndUserIds bookAndUser);
-
+        Task<int> RemoveBookToUserFavourites(BookAndUserIds bookAndUser);
+        Task<bool> BorrowBook(BookAndUserIds bookAndUser);
+        Task<List<LoanDTO>> GetAllLoansByUserId(long idUser);
+        Task<bool> DeleteLoan(long idBook);
     }
 }

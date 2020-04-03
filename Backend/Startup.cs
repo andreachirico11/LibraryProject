@@ -40,6 +40,7 @@ namespace Backend
             services.AddTransient<IAuthorsRepository, AuthorsRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserFavouritesRepository, UserFavouritesRepository>();
+            services.AddTransient<IBorrowRepository, BorrowRepository>();
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",

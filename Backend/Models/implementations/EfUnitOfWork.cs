@@ -15,12 +15,14 @@ namespace Backend.Models
 
         public IBooksRepository BooksRepo { get; set; }
         public IUserRepository UserRepo { get; set; }
+        public IBorrowRepository BorrowRepo { get; set; }
         public IUserFavouritesRepository UserFavRepo { get; set; }
-        public EfUnitOfWork(IBooksRepository bookR, IUserRepository userR, IUserFavouritesRepository userFav) 
+        public EfUnitOfWork(IBooksRepository bookR, IUserRepository userR, IUserFavouritesRepository userFav, IBorrowRepository borrowR) 
         {
             this.BooksRepo = bookR;
             this.UserRepo = userR;
             this.UserFavRepo = userFav;
+            this.BorrowRepo = borrowR;
         }
 
 
@@ -57,6 +59,26 @@ namespace Backend.Models
         public Task<int> AddBookToUserFavourites(BookAndUserIds bookAndUser)
         {
             return this.UserFavRepo.addBookToUserFavourites(bookAndUser);
+        }
+        public Task<int> RemoveBookToUserFavourites(BookAndUserIds bookAndUser)
+        {
+            return this.UserFavRepo.RemoveBookFromUserFavourites(bookAndUser);
+        }
+
+
+        public Task<bool> BorrowBook(BookAndUserIds bookAndUser) 
+        {
+            return this.BorrowRepo.BorrowBook(bookAndUser);
+        }
+
+        public Task<List<LoanDTO>> GetAllLoansByUserId(long idUser )
+        {
+            return this.BorrowRepo.GetAllLoansByUserId(idUser);
+        }
+
+        public Task<bool> DeleteLoan(long idBook)
+        {
+            return this.BorrowRepo.DeleteLoan(idBook);
         }
 
 

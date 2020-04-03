@@ -10,6 +10,7 @@ namespace Backend.Models
          Task<bool> VerifyIfBookIsAlreadyInFavourites(long idBook, long idUser);
          Task<long> getMaxId();
          Task<int> addBookToUserFavourites(BookAndUserIds bookAndUser);
+         Task<int> RemoveBookFromUserFavourites(BookAndUserIds bookAndUser);
         
     }
 }

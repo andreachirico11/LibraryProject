@@ -7,19 +7,15 @@ import { Router } from "@angular/router";
 
 import { environment } from "../../environments/environment";
 
-
 @Injectable({ providedIn: "root" })
 export class UserService {
   private connString = environment.connectionStr + "users";
-  public loggedUserLocal : User
+  public loggedUserLocal: User;
   public loggedUser = new BehaviorSubject<User>(null);
   private mockConnStr = "http://localhost:4200/postUserMock";
   private head = new HttpHeaders({ "Content-Type": "application/json" });
 
-  constructor(
-    private http: HttpClient,
-    private router: Router
-  ) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   getLoggedUser() {
     this.loggedUser.next(JSON.parse(localStorage.getItem("loggedUser")));
@@ -28,7 +24,7 @@ export class UserService {
   refreshUser() {
     const id = this.loggedUserLocal.idUser;
     this.http
-      .get(this.connString + '/' + id)
+      .get(this.connString + "/" + id)
       .pipe(take(1))
       .subscribe((res: User) => {
         this.setUser(res);
@@ -68,5 +64,17 @@ export class UserService {
     this.loggedUserLocal = null;
     this.loggedUser.next(null);
     this.router.navigate([""]);
+  }
+
+  addorRemoveBookFromFavourites(addOrRemove: boolean, idBook, idUser) {
+    const connStr =
+      environment.connectionStr + "userFavourites/" + (addOrRemove
+        ? "add"
+        : "remove");
+        console.log(connStr);
+
+    this.http
+      .post(connStr, { idBook: idBook, idUser: idUser })
+      .pipe(take(1)).subscribe(() => this.refreshUser());
   }
 }

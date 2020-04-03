@@ -10,15 +10,17 @@ namespace Backend.Models
     {
         public IQueryable<Books> Books { get; set; }
         public IGenresRepository GenresRepository { get; set; }
-        public  IAuthorsRepository AuthorsRepository { get; set; }
+        public IAuthorsRepository AuthorsRepository { get; set; }
+        public IBorrowRepository BorrowRepository { get; set; }
         public DBLibraryContext context { get; set; }
 
-        public BooksRepository(DBLibraryContext ctx, IGenresRepository genRepo,  IAuthorsRepository authorsRepository)
+        public BooksRepository(DBLibraryContext ctx, IGenresRepository genRepo, IAuthorsRepository authorsRepository, IBorrowRepository borrowR)
         {
             this.context = ctx;
             this.Books = ctx.Books;
             this.GenresRepository = genRepo;
             this.AuthorsRepository = authorsRepository;
+            this.BorrowRepository = borrowR;
         }
 
 
@@ -32,7 +34,13 @@ namespace Backend.Models
                         .Include(b => b.IdGenreNavigation)
                         .Select(b => new BookDTO(b, b.IdGenreNavigation, b.IdAuthorNavigation)
                         ).ToListAsync();
-                return books;
+                var updatedBooks = new List<BookDTO>();
+                foreach (BookDTO book in books)
+                {
+                    var bookToAdd = await this.addBookLoan(book);
+                    updatedBooks.Add(bookToAdd);
+                }
+                return updatedBooks;
             }
             catch
             {
@@ -40,17 +48,18 @@ namespace Backend.Models
                 throw;
             }
         }
-        public Task<BookDTO> GetBookById(long id)
+        public async Task<BookDTO> GetBookById(long id)
         {
             try
             {
-                var book = context.Books
+                var book = await context.Books
                        .Include(b => b.IdAuthorNavigation)
                        .Include(b => b.IdGenreNavigation)
                        .Where(b => b.IdBook == id)
                        .Select(b => new BookDTO(b, b.IdGenreNavigation, b.IdAuthorNavigation)
                        ).FirstOrDefaultAsync();
-                return book;
+                var updatedBook = await this.addBookLoan(book);
+                return updatedBook;
             }
             catch
             {
@@ -66,7 +75,7 @@ namespace Backend.Models
             Books book;
             long idGen;
             long idAuth;
-            
+
             var genre = await GenresRepository.GetGenreByName(newBook.Genre);
             if (genre == null)
             {
@@ -78,7 +87,7 @@ namespace Backend.Models
             }
 
             var author = await AuthorsRepository.GetAuthorByCompleteName(newBook.Author);
-            if(author == null)
+            if (author == null)
             {
                 idAuth = await this.AuthorsRepository.InsertNewAuthor(newBook.Author);
             }
@@ -92,6 +101,25 @@ namespace Backend.Models
             await context.SaveChangesAsync();
             return true;
         }
+
+
+        public async Task<BookDTO> addBookLoan(BookDTO book)
+        {
+            var isLoaned = await this.BorrowRepository.DiscoverIfBookIsBorrowed(book.IdBook);
+            if (isLoaned)
+            {
+                book.IsRented = true;
+            }
+            else
+            {
+                book.IsRented = false;
+            }
+            return book;
+        }
+
+
+
+
 
 
 
