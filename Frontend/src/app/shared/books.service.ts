@@ -29,9 +29,9 @@ export class dbService {
     return this.http.get<BookModel>(environment.connectionStr + "books/" + id);
   }
 
-
-
-
+  getAllBooksWithoutCover() {
+    return this.http.get<BookModel[]>(environment.connectionStr + "books");
+  }
 
 
   addCover(books: BookModel[]): BookModel[] {

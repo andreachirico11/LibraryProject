@@ -11,5 +11,6 @@ namespace Backend.Models
         Task<bool> BorrowBook(BookAndUserIds bookAndUser);
         Task<List<LoanDTO>> GetAllLoansByUserId(long idUser);
         Task<bool> DeleteLoan(long idBook);
+        Task<List<LoanDTO>> GetAllLoans();
     }
 }

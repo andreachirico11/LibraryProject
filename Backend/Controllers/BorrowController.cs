@@ -35,5 +35,11 @@ namespace Backend.Controllers
         {
             return await this.unitOfWork.DeleteLoan(idBook);
         }
+
+        [HttpGet]
+        public async Task<List<LoanDTO>> GetAllLoans()
+        {
+            return await this.unitOfWork.GetAllLoans();
+        }
     }
 }

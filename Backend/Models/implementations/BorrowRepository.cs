@@ -11,12 +11,10 @@ namespace Backend.Models
 
         public BorrowRepository(DBLibraryContext context)
         {
-            // BookRepo = bookRepo;
             this.context = context;
         }
 
         public DBLibraryContext context { get; set; }
-        // public IBooksRepository BookRepo { get; set; }
 
 
         public async Task<bool> DiscoverIfBookIsBorrowed(long idBook)
@@ -81,6 +79,15 @@ namespace Backend.Models
             await context.SaveChangesAsync();
             return true;
             
+        }
+
+        public async Task<List<LoanDTO>> GetAllLoans()
+        {
+            return await context.Loans
+                        .Include(l => l.IdUserNavigation)
+                        .Include(l => l.IdBookNavigation)
+                        .Select(l => new LoanDTO(l))
+                        .ToListAsync();
         }
 
     }

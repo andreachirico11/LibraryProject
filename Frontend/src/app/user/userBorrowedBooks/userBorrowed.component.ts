@@ -3,7 +3,7 @@ import { User } from "src/app/shared/models/userModel";
 import { Subscription } from "rxjs";
 import { UserService } from "src/app/shared/user.service";
 import { BorrowService } from "src/app/shared/borrow.service";
-import { loan } from "src/app/shared/models/loanModel";
+import { Loan } from "src/app/shared/models/loanModel";
 
 @Component({
   selector: "app-user-borrowed",
@@ -13,7 +13,7 @@ export class UserBorrowedComponent implements OnInit, OnDestroy {
   loggedUser: User = null;
   subscription: Subscription;
   subscription2: Subscription;
-  public loans: loan[] = [];
+  public loans: Loan[] = [];
 
   constructor(
     private userService: UserService,
@@ -36,7 +36,7 @@ export class UserBorrowedComponent implements OnInit, OnDestroy {
   getAllLoans() {
     this.subscription2 = this.borrowService
     .getAllLoanedBooksByUserId(this.loggedUser.idUser)
-    .subscribe((res: loan[]) => this.loans = res);
+    .subscribe((res: Loan[]) => this.loans = res);
   }
 
   returnBook(idBook: number) {

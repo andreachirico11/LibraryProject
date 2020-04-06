@@ -12,5 +12,6 @@ namespace Backend.Models
         Task<UserDTO> InsertNewUser(UserDTO newUser); 
         Task<UserDTO> FindUserByCredentials(Credentials credentials);
         Task<UserDTO> GetUserById(long id);
+        Task<List<UserDTO>> GetAllUsers();
     }
 }

@@ -1,48 +1,45 @@
 <ng-template appPlaceholder></ng-template>
-<nav class="navbar bg-dark ">
+<nav class="navbar bg-dark">
   <div class="row w-100 m-0">
     <div class="col-md-10 col-xs-11 p-0">
       <div class="row">
         <div class="align-self-center text-white">
           <button
+            (click)="collapseNavStatus = !collapseNavStatus"
             class="btn navbar-toggler btn-lg"
-            data-toggle="collapse"
-            data-target="#navCollapse"
           >
+            <!-- data-toggle="collapse"
+            data-target="#navCollapse" -->
             <fa-icon [icon]="menuIcon" class="fa-md text-danger"></fa-icon>
           </button>
         </div>
 
-        <div class="col-md-4  align-self-center collapse " id="navCollapse">
-          <div class="navbar-nav navbar-expand-lg ">
-            <a
-              href="#"
-              class="nav-item  mx-auto text-white"
-              routerLink="/library"
-              data-toggle="collapse"
-              data-target="#navCollapse"
-            >
-              <h5>Library</h5>
-            </a>
-            <a
-              href="#"
-              class="nav-item mx-auto text-white"
-              data-toggle="collapse"
-              data-target="#navCollapse"
-            >
-              <h5>authors</h5>
-            </a>
-            <a
-              href="#"
-              class="nav-item  mx-auto text-white"
-              data-toggle="collapse"
-              data-target="#navCollapse"
-            >
-              <h5>authors</h5>
-            </a>
+        <div *ngIf="collapseNavStatus">
+          <div class="col-md-4 align-self-center" id="navCollapse">
+            <div class="navbar-nav  navbar-expand-lg">
+              <a
+                class="nav-item mx-auto text-white"
+                routerLink="/library"
+              >
+                <!-- data-toggle="collapse"
+                data-target="#navCollapse" -->
+                <h5>Library</h5>
+              </a>
+              <a href="#" class="nav-item mx-auto text-white">
+                <!-- data-toggle="collapse"
+                data-target="#navCollapse" -->
+                <h5>authors</h5>
+              </a>
+              <a href="#" class="nav-item mx-auto text-white">
+                <!-- data-toggle="collapse"
+                data-target="#navCollapse" -->
+                <h5>authors</h5>
+              </a>
+            </div>
           </div>
         </div>
-        <div class=" text-center">
+
+        <div class="text-center">
           <a href="#" class="navbar-brand m-0">
             <h1 class="text-white">GoodLibrary</h1>
           </a>
@@ -51,7 +48,7 @@
     </div>
 
     <div
-      class="col-md-2  p-0 align-self-center"
+      class="col-md-2 p-0 align-self-center"
       *ngIf="!isLoggedIn; else logged"
     >
       <button
@@ -61,7 +58,7 @@
         Log In
       </button>
       <button
-        class="btn btn-outline text-white w-30  mx-auto"
+        class="btn btn-outline text-white w-30 mx-auto"
         (click)="openDialogForm()"
       >
         Sign In
@@ -69,7 +66,7 @@
     </div>
 
     <ng-template #logged>
-      <div class="col-md-2  p-0 align-self-center">
+      <div class="col-md-2 p-0 align-self-center">
         <div class="row">
           <fa-icon [icon]="avatarIcon" class="fa-md text-danger"></fa-icon>
           <span class="text-white ml-2">Hello {{ userName }}!</span>
@@ -84,6 +81,14 @@
           >
             My Profile
           </button>
+          <button
+            class="btn btn-outline-warning btn-sm"
+            routerLink="/admin"
+            *ngIf="isAdmin == true"
+          >
+            <fa-icon [icon]="gearsIcon" class="fa-sm text-warning"></fa-icon>
+            Administrator
+          </button>
         </div>
       </div>
     </ng-template>
@@ -91,7 +96,11 @@
 
   <!-- >>>>>>>>>>>>>>>>>>>LOGIN FORM -->
 
-  <div class="row mt-2 w-100 m-0 p-0 collapse" id="loginCollapse" [ngClass]="{'show': toggleLogin}">
+  <div
+    class="row mt-2 w-100 m-0 p-0 collapse"
+    id="loginCollapse"
+    [ngClass]="{ show: toggleLogin }"
+  >
     <div class="col-md-5 offset-md-7">
       <form class="form-inline" [formGroup]="accessForm" (ngSubmit)="login()">
         <input
@@ -104,13 +113,12 @@
           placeholder="Password"
           formControlName="password"
         />
-        <button
-          class="btn btn-outline-danger  w-100"
-          type="submit"
-          >
+        <button class="btn btn-outline-danger w-100" type="submit">
           Submit
         </button>
-        <div *ngIf="userNotFound" class="alert alert-warning w-100 alert-block">Wrong Email Or Password</div>
+        <div *ngIf="userNotFound" class="alert alert-warning w-100 alert-block">
+          Wrong Email Or Password
+        </div>
       </form>
     </div>
   </div>

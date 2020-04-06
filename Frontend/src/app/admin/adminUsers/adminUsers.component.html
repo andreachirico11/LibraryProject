@@ -1,0 +1,42 @@
+<div [ngClass]="{ row: detailActivated }">
+  <div [ngClass]="{ 'col-md-6': detailActivated }">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead class="bg-dark text-white">
+          <tr>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Admin</td>
+            <td>#</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of allUsers">
+            <td>{{ user.name }} {{ user.surname }}</td>
+            <td>{{ user.email }}</td>
+            <td *ngIf="user.isAdmin === true">Yes</td>
+            <td *ngIf="user.isAdmin === false">No</td>
+            <td>
+              <button
+                class="btn-outline-dark"
+                (click)="openDetails(user.idUser)"
+              >
+                Details
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button
+      class="btn btn-outline-dark float-right"
+      *ngIf="detailActivated"
+      (click)="detailActivated = !detailActivated"
+    >
+      Close Details
+    </button>
+  </div>
+  <div *ngIf="detailActivated" class="col-md-6">
+    <app-admin-user-detail [userToShow]="userToEmit"></app-admin-user-detail>
+  </div>
+</div>

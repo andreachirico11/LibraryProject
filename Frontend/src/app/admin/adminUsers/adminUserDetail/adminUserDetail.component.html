@@ -1,0 +1,54 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="card-title">{{ userToShow.name }} {{ userToShow.surname }}</h5>
+  </div>
+  <div class="card-body">
+    <table class="table table-flush">
+      <tr>
+        <td>
+          Email
+        </td>
+        <td>
+          {{ userToShow.email }}
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          idUser
+        </td>
+        <td>
+          {{ userToShow.idUser }}
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          Phone
+        </td>
+        <td>
+          {{ userToShow.phone }}
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          Address
+        </td>
+        <td>
+          {{ userToShow.address }}
+        </td>
+      </tr>
+
+    </table>
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-outline-dark btn-block">
+      Remove
+    </button>
+    <button *ngIf="!userToShow.isAdmin"
+     class="btn btn-outline-dark btn-block">
+      Make Admin
+    </button>
+  </div>
+</div>

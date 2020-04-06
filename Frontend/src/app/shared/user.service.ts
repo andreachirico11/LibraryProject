@@ -21,6 +21,10 @@ export class UserService {
     this.loggedUser.next(JSON.parse(localStorage.getItem("loggedUser")));
   }
 
+  getAllUsers() {
+    return this.http.get<User[]>(this.connString);
+  }
+
   refreshUser() {
     const id = this.loggedUserLocal.idUser;
     this.http

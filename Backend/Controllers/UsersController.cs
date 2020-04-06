@@ -27,5 +27,10 @@ namespace Backend.Controllers
         {
             return await unitOfWork.GetUserById(id);
         }
+        [HttpGet]
+        public async Task<List<UserDTO>> GetAllUsers()
+        {
+            return await unitOfWork.GetAllUsers();
+        }
     }
 }

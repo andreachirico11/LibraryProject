@@ -2,11 +2,10 @@ import {
   Component,
   OnInit,
   ComponentFactoryResolver,
-  ViewChild,
-  ElementRef
+  ViewChild
 } from "@angular/core";
-import { faBars, faUser } from "@fortawesome/free-solid-svg-icons";
-import { FormGroup, FormControl, Validators, NgForm } from "@angular/forms";
+import { faBars, faUser,  faCogs} from "@fortawesome/free-solid-svg-icons";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { AuthenticationService } from "../shared/authentication.service";
 import { Subscription } from "rxjs";
 import { RegistrationModalComponent } from "../registrationForm/registrationForm.component";
@@ -19,8 +18,10 @@ import { UserService } from '../shared/user.service';
   styles: ["nav.navbar {opacity: 0.6}"]
 })
 export class NavbarComponent implements OnInit {
+  collapseNavStatus = false;
   menuIcon = faBars;
   avatarIcon = faUser;
+  gearsIcon = faCogs;
   userName: string;
   accessForm: FormGroup;
   isLoggedIn = false;
@@ -29,6 +30,7 @@ export class NavbarComponent implements OnInit {
   closeFormEvent: Subscription;
   userNotFound = false;
   toggleLogin = false;
+  isAdmin = false;
 
   constructor(
     private authService: AuthenticationService,
@@ -47,6 +49,7 @@ export class NavbarComponent implements OnInit {
       } else {
         this.isLoggedIn = true;
         this.userName = res.name;
+        res.isAdmin ? this.isAdmin = true : this.isAdmin = false;
       }
     });
     this.accessForm = new FormGroup({

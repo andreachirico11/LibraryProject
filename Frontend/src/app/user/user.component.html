@@ -6,9 +6,27 @@
       </div>
       <div class="col-md-4 align-items-right">
         <div class="btn-group">
-          <button class="btn btn-outline-warning" routerLink="/user/favourites" routerLinkActive="active">Favourite Books</button>
-          <button class="btn btn-outline-warning" routerLink="/user/borrowed" routerLinkActive="active">Borrowed Books</button>
-          <button class="btn btn-outline-warning" routerLink="/user/info" routerLinkActive="active">Personal Info</button>
+          <button
+            class="btn btn-outline-warning"
+            routerLink="/user/favourites"
+            routerLinkActive="active"
+          >
+            Favourite Books
+          </button>
+          <button
+            class="btn btn-outline-warning"
+            routerLink="/user/borrowed"
+            routerLinkActive="active"
+          >
+            Borrowed Books
+          </button>
+          <button
+            class="btn btn-outline-warning"
+            routerLink="/user/info"
+            routerLinkActive="active"
+          >
+            Personal Info
+          </button>
         </div>
       </div>
     </div>
@@ -18,7 +36,7 @@
         <router-outlet></router-outlet>
       </div>
       <div class="col-md-4">
-        <div class=" d-none d-md-block">
+        <div class="d-none d-md-block">
           <app-user-img [loggedUser]="loggedUser"></app-user-img>
         </div>
       </div>

@@ -8,6 +8,7 @@ public class LoanDTO
     public long IdBook { get; set; }
     public string? BookTitle { get; set; }
     public string? Isbn { get; set; }
+    public string? UserName { get; set; }
 
     public LoanDTO() { }
 
@@ -18,5 +19,15 @@ public class LoanDTO
         BookTitle = bookTitle;
         Isbn = isbn;
         IdBook = idBook;
+    }
+    public LoanDTO(Loans loan)
+    {
+        DateStart = loan.DateStart;
+        DateReturn = loan.DateReturn;
+        IdUser = loan.IdUser;
+        IdBook = loan.IdBook;
+        BookTitle = loan.IdBookNavigation.Title;
+        Isbn = loan.IdBookNavigation.Isbn;
+        UserName = loan.IdUserNavigation.Name + " " + loan.IdUserNavigation.Surname;
     }
 }

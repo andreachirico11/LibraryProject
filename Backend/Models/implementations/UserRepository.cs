@@ -72,6 +72,19 @@ namespace Backend.Models
             }
         }
 
+        public async Task<List<UserDTO>> GetAllUsers()
+        {
+            try
+            {
+                return await Context.Users.Select( u => new UserDTO(u)).ToListAsync();
+            }
+            catch 
+            {
+                Console.WriteLine("getallUsers error");
+                throw;
+            }
+        }
+
 
 
     }

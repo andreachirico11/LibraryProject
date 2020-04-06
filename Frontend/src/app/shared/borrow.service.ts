@@ -3,7 +3,7 @@ import { environment } from "../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { take, map } from "rxjs/operators";
 import { UserService } from "./user.service";
-import { loan } from "./models/loanModel";
+import { Loan } from "./models/loanModel";
 
 @Injectable({ providedIn: "root" })
 export class BorrowService {
@@ -15,6 +15,10 @@ export class BorrowService {
     private userService: UserService
   ) {}
 
+  getAllLoans() {
+    return this.http.get<Loan[]>(this.connectionString);
+  }
+
   borrowBook(idBook: number) {
     const idUser = this.userService.loggedUserLocal.idUser;
     return this.http
@@ -24,7 +28,7 @@ export class BorrowService {
 
   getAllLoanedBooksByUserId(idUser: number) {
     return this.http
-      .get<loan[]>(this.connectionString + "/" + idUser)
+      .get<Loan[]>(this.connectionString + "/" + idUser)
       .pipe(
         map( res => this.addDaysLeft(res))
       );
@@ -38,7 +42,7 @@ export class BorrowService {
     return Math.floor((returnDate - now) / (1000 * 3600 * 24));
   }
 
-  addDaysLeft(loansToMap: loan[]) {
+  addDaysLeft(loansToMap: Loan[]) {
     loansToMap.forEach(loan => {
         loan.daysLeft = this.calculateDaysLeft(loan.dateStart);
     });

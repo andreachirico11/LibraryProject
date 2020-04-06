@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 
 
-namespace Backend.Models 
+namespace Backend.Models
 {
-    public class EfUnitOfWork: IUnitOfWork
+    public class EfUnitOfWork : IUnitOfWork
     {
         DBLibraryContext context = new DBLibraryContext();
 
@@ -17,7 +17,7 @@ namespace Backend.Models
         public IUserRepository UserRepo { get; set; }
         public IBorrowRepository BorrowRepo { get; set; }
         public IUserFavouritesRepository UserFavRepo { get; set; }
-        public EfUnitOfWork(IBooksRepository bookR, IUserRepository userR, IUserFavouritesRepository userFav, IBorrowRepository borrowR) 
+        public EfUnitOfWork(IBooksRepository bookR, IUserRepository userR, IUserFavouritesRepository userFav, IBorrowRepository borrowR)
         {
             this.BooksRepo = bookR;
             this.UserRepo = userR;
@@ -30,30 +30,33 @@ namespace Backend.Models
         public Task<List<BookDTO>> GetAllBooks()
         {
             return this.BooksRepo.GetAllBooks();
-        } 
-
+        }
         public Task<BookDTO> GetBookById(long id)
         {
             return this.BooksRepo.GetBookById(id);
         }
-
-        public  Task<bool> InsertBook(BookDTO newBook)
+        public Task<bool> InsertBook(BookDTO newBook)
         {
-            return  this.BooksRepo.InsertNewBook(newBook);
+            return this.BooksRepo.InsertNewBook(newBook);
         }
 
 
 
-
-         public Task<UserDTO> FindUserByCredentials(Credentials credentials)
-         {
-             return this.UserRepo.FindUserByCredentials(credentials);
-         }
         
+        public Task<List<UserDTO>> GetAllUsers() 
+        {
+            return this.UserRepo.GetAllUsers();
+        }
+        public Task<UserDTO> FindUserByCredentials(Credentials credentials)
+        {
+            return this.UserRepo.FindUserByCredentials(credentials);
+        }
         public Task<UserDTO> GetUserById(long id)
         {
             return this.UserRepo.GetUserById(id);
         }
+
+
 
 
         public Task<int> AddBookToUserFavourites(BookAndUserIds bookAndUser)
@@ -66,16 +69,25 @@ namespace Backend.Models
         }
 
 
-        public Task<bool> BorrowBook(BookAndUserIds bookAndUser) 
+
+
+
+        public Task<bool> BorrowBook(BookAndUserIds bookAndUser)
         {
             return this.BorrowRepo.BorrowBook(bookAndUser);
         }
+        public Task<List<LoanDTO>> GetAllLoans()
+        {
+            return this.BorrowRepo.GetAllLoans();
+        }
 
-        public Task<List<LoanDTO>> GetAllLoansByUserId(long idUser )
+
+
+
+        public Task<List<LoanDTO>> GetAllLoansByUserId(long idUser)
         {
             return this.BorrowRepo.GetAllLoansByUserId(idUser);
         }
-
         public Task<bool> DeleteLoan(long idBook)
         {
             return this.BorrowRepo.DeleteLoan(idBook);
@@ -135,7 +147,7 @@ namespace Backend.Models
         //         // return  GetBookById(id);
         //         success = context.SaveChangesAsync();
         //         return success;
-                
+
         //     }
         //     catch 
         //     {

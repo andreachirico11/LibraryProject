@@ -1,0 +1,41 @@
+<div [ngClass]="{ row: detailActivated }">
+  <div [ngClass]="{ 'col-md-6': detailActivated }">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead class="bg-dark text-white">
+          <tr>
+            <td>Title</td>
+            <td>Author</td>
+            <td>Isbn</td>
+            <td>#</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let book of allBooks">
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.isbn }}</td>
+            <td>
+              <button
+                class="btn-outline-dark"
+                (click)="openDetails(book.idBook)"
+              >
+                Details
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button
+      class="btn btn-outline-dark float-right"
+      *ngIf="detailActivated"
+      (click)="detailActivated = !detailActivated"
+    >
+      Close Details
+    </button>
+  </div>
+  <div *ngIf="detailActivated" class="col-md-6">
+    <app-admin-book-detail [bookToShow]="bookToEmit"></app-admin-book-detail>
+  </div>
+</div>

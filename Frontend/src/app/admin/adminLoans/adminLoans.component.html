@@ -1,0 +1,22 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead class="bg-dark text-white">
+      <tr>
+        <td>Book Title</td>
+        <td>User</td>
+        <td>Rent Date</td>
+        <td>Return Date</td>
+        <td>Isbn</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let loan of allLoans">
+        <td>{{ loan.bookTitle }}</td>
+        <td>{{ loan.userName }}</td>
+        <td>{{ loan.dateStart | date  }}</td>
+        <td>{{ loan.dateReturn | date  }}</td>
+        <td>{{ loan.isbn }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
