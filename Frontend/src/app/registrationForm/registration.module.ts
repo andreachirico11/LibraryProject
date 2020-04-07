@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RegistrationModalComponent } from './registrationForm.component';
-import { PlaceholderDirective } from '../shared/placeholder.directive';
 import { ValidationDirective } from './validation.directive';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule } from '@angular/forms';

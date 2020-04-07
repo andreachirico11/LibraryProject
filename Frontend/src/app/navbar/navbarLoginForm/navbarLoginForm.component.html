@@ -1,0 +1,18 @@
+<form class="form-inline" [formGroup]="accessForm" (ngSubmit)="login()">
+  <input
+    class="form-control w-50"
+    placeholder="Email"
+    formControlName="email"
+  />
+  <input
+    class="form-control w-50"
+    placeholder="Password"
+    formControlName="password"
+  />
+  <button class="btn btn-outline-danger w-100" type="submit">
+    Submit
+  </button>
+  <div *ngIf="userNotFound" class="alert alert-warning w-100 alert-block">
+    Wrong Email Or Password
+  </div>
+</form>

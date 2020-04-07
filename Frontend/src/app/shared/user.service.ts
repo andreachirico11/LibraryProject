@@ -75,8 +75,6 @@ export class UserService {
       environment.connectionStr + "userFavourites/" + (addOrRemove
         ? "add"
         : "remove");
-        console.log(connStr);
-
     this.http
       .post(connStr, { idBook: idBook, idUser: idUser })
       .pipe(take(1)).subscribe(() => this.refreshUser());

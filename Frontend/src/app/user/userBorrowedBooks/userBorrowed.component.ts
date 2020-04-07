@@ -40,6 +40,8 @@ export class UserBorrowedComponent implements OnInit, OnDestroy {
   }
 
   returnBook(idBook: number) {
-    this.borrowService.returnBook(idBook).subscribe( r => this.getAllLoans() );
+    this.borrowService.returnBook(idBook).subscribe( r =>{
+      this.getAllLoans()
+    });
   }
 }

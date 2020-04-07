@@ -1,4 +1,6 @@
-<ng-template appPlaceholder></ng-template>
+<!-- <ng-template appPlaceholder ></ng-template> -->
+<ng-template #modalRegViewReference></ng-template>
+
 <nav class="navbar bg-dark">
   <div class="row w-100 m-0">
     <div class="col-md-10 col-xs-11 p-0">
@@ -8,35 +10,14 @@
             (click)="collapseNavStatus = !collapseNavStatus"
             class="btn navbar-toggler btn-lg"
           >
-            <!-- data-toggle="collapse"
-            data-target="#navCollapse" -->
             <fa-icon [icon]="menuIcon" class="fa-md text-danger"></fa-icon>
           </button>
         </div>
 
-        <div *ngIf="collapseNavStatus">
-          <div class="col-md-4 align-self-center" id="navCollapse">
-            <div class="navbar-nav  navbar-expand-lg">
-              <a
-                class="nav-item mx-auto text-white"
-                routerLink="/library"
-              >
-                <!-- data-toggle="collapse"
-                data-target="#navCollapse" -->
-                <h5>Library</h5>
-              </a>
-              <a href="#" class="nav-item mx-auto text-white">
-                <!-- data-toggle="collapse"
-                data-target="#navCollapse" -->
-                <h5>authors</h5>
-              </a>
-              <a href="#" class="nav-item mx-auto text-white">
-                <!-- data-toggle="collapse"
-                data-target="#navCollapse" -->
-                <h5>authors</h5>
-              </a>
-            </div>
-          </div>
+        <div class="col-md-4 align-self-center" *ngIf="collapseNavStatus">
+          <app-navbar-navigation
+            (navEvent)="collapseNavStatus = false"
+          ></app-navbar-navigation>
         </div>
 
         <div class="text-center">
@@ -67,29 +48,10 @@
 
     <ng-template #logged>
       <div class="col-md-2 p-0 align-self-center">
-        <div class="row">
-          <fa-icon [icon]="avatarIcon" class="fa-md text-danger"></fa-icon>
-          <span class="text-white ml-2">Hello {{ userName }}!</span>
-        </div>
-        <div class="row">
-          <button class="btn btn-outline-danger btn-sm" (click)="logout()">
-            Log Out
-          </button>
-          <button
-            class="btn btn-outline-success btn-sm"
-            routerLink="/user/favourites"
-          >
-            My Profile
-          </button>
-          <button
-            class="btn btn-outline-warning btn-sm"
-            routerLink="/admin"
-            *ngIf="isAdmin == true"
-          >
-            <fa-icon [icon]="gearsIcon" class="fa-sm text-warning"></fa-icon>
-            Administrator
-          </button>
-        </div>
+        <app-navbar-logged
+          [userName]="userName"
+          [isAdmin]="isAdmin"
+        ></app-navbar-logged>
       </div>
     </ng-template>
   </div>
@@ -102,24 +64,54 @@
     [ngClass]="{ show: toggleLogin }"
   >
     <div class="col-md-5 offset-md-7">
-      <form class="form-inline" [formGroup]="accessForm" (ngSubmit)="login()">
-        <input
-          class="form-control w-50"
-          placeholder="Email"
-          formControlName="email"
-        />
-        <input
-          class="form-control w-50"
-          placeholder="Password"
-          formControlName="password"
-        />
-        <button class="btn btn-outline-danger w-100" type="submit">
-          Submit
-        </button>
-        <div *ngIf="userNotFound" class="alert alert-warning w-100 alert-block">
-          Wrong Email Or Password
-        </div>
-      </form>
+      <app-navbar-login-form
+        (closeFormEvent)="openLoginForm()"
+      ></app-navbar-login-form>
     </div>
   </div>
 </nav>
+
+<!-- <div class="row">
+                              <fa-icon [icon]="avatarIcon" class="fa-md text-danger"></fa-icon>
+                              <span class="text-white ml-2">Hello {{ userName }}!</span>
+                            </div>
+                            <div class="row">
+                              <button class="btn btn-outline-danger btn-sm" (click)="logout()">
+                                Log Out
+                              </button>
+                              <button
+                                class="btn btn-outline-success btn-sm"
+                                routerLink="/user/favourites"
+                              >
+                                My Profile
+                              </button>
+                              <button
+                                class="btn btn-outline-warning btn-sm"
+                                routerLink="/admin"
+                                *ngIf="isAdmin == true"
+                              >
+                                <fa-icon [icon]="gearsIcon" class="fa-sm text-warning"></fa-icon>
+                                Administrator
+                              </button>
+                            </div> -->
+
+<!-- <div class="col-md-5 offset-md-7">
+  <form class="form-inline" [formGroup]="accessForm" (ngSubmit)="login()">
+    <input
+      class="form-control w-50"
+      placeholder="Email"
+      formControlName="email"
+    />
+    <input
+      class="form-control w-50"
+      placeholder="Password"
+      formControlName="password"
+    />
+    <button class="btn btn-outline-danger w-100" type="submit">
+      Submit
+    </button>
+    <div *ngIf="userNotFound" class="alert alert-warning w-100 alert-block">
+      Wrong Email Or Password
+    </div>
+  </form>
+</div> -->

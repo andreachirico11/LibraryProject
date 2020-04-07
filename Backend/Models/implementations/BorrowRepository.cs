@@ -19,7 +19,9 @@ namespace Backend.Models
 
         public async Task<bool> DiscoverIfBookIsBorrowed(long idBook)
         {
-            var foundBook = await this.context.Loans.Where(l => l.IdBook == idBook).FirstOrDefaultAsync();
+            var foundBook = await this.context.Loans
+                                        .Where(l => l.IdBook == idBook && l.DateReturn == null)
+                                        .FirstOrDefaultAsync();
             return foundBook != null ? true : false;
         }
         public async Task<long> getMaxId()
@@ -34,7 +36,6 @@ namespace Backend.Models
         {
             var id = await this.getMaxId() + 1;
             var date = DateTime.Now;
-            System.Console.WriteLine(date);
             var newLoan = new Loans(id, date, bookAndUser.idUser, bookAndUser.idBook);
             context.Loans.Add(newLoan);
             var result = await context.SaveChangesAsync();
@@ -68,16 +69,23 @@ namespace Backend.Models
 
         public async Task<bool> DeleteLoan(long idBook)
         {
-            var loanToRemove = await this.context.Loans.Where( l => l.IdBook == idBook).FirstOrDefaultAsync();
-
-            loanToRemove.DateReturn = DateTime.Now;
-
-            this.context.Update(loanToRemove);
-
-
-            // this.context.Loans.Remove(loanToRemove);
+            var loanToUpdate = await this.context.Loans
+                                .Where( l => l.IdBook == idBook && l.DateReturn == null)
+                                .FirstOrDefaultAsync();
+            loanToUpdate.DateReturn = DateTime.Now;
+            // this.context.Update(loanToRemove);
             await context.SaveChangesAsync();
             return true;
+
+
+
+
+            // var loanToRemove = await this.context.Loans.Where( l => l.IdBook == idBook).FirstOrDefaultAsync();
+
+            // loanToRemove.DateReturn = DateTime.Now;
+            // this.context.Update(loanToRemove);
+            // await context.SaveChangesAsync();
+            // return true;
             
         }
 
