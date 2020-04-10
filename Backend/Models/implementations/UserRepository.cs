@@ -17,15 +17,25 @@ namespace Backend.Models
         }
 
 
-        public Task<UserDTO> InsertNewUser(UserDTO newUser)
+        public async Task<UserDTO> InsertNewUser(Users newUser)
         {
-            throw new NotImplementedException();
+            var credentials = new Credentials(newUser.Password, newUser.Email);
+            var alreadyRegistered = await this.FindUserByCredentials(credentials);
+
+            if (alreadyRegistered == null)
+            {
+                newUser.IdUser = await getMaxId() + 1;
+                Context.Users.Add(newUser);
+                await Context.SaveChangesAsync();
+                return new UserDTO(newUser);
+            }
+            return null;
         }
         public async Task<UserDTO> FindUserByCredentials(Credentials credential)
         {
             try
             {
-               
+
                 var user = await Context.Users
                            .Where(u => u.Password == credential.Password && u.Email == credential.Email)
                            .FirstOrDefaultAsync();
@@ -33,7 +43,6 @@ namespace Backend.Models
                 if (user != null)
                 {
                     return await this.GetUserById(user.IdUser);
-                    // return user;
                 }
                 else
                 {
@@ -62,7 +71,7 @@ namespace Backend.Models
                     BookDTO book = await this.BookRepo.GetBookById(UsFav.IdBook);
                     favBooks.Add(book);
                 }
-                
+
                 return new UserDTO(foundUser, favBooks);
             }
             catch
@@ -76,13 +85,21 @@ namespace Backend.Models
         {
             try
             {
-                return await Context.Users.Select( u => new UserDTO(u)).ToListAsync();
+                return await Context.Users.Select(u => new UserDTO(u)).ToListAsync();
             }
-            catch 
+            catch
             {
                 Console.WriteLine("getallUsers error");
                 throw;
             }
+        }
+
+        public async Task<long> getMaxId()
+        {
+            return await this.Context.Users
+                                .OrderByDescending(u => u.IdUser)
+                                .Select(uf => uf.IdUser)
+                                .FirstOrDefaultAsync();
         }
 
 
@@ -91,6 +108,12 @@ namespace Backend.Models
 
     public class Credentials
     {
+        public Credentials(string password, string email)
+        {
+            Password = password;
+            Email = email;
+        }
+
         public string Password { get; set; }
         public string Email { get; set; }
     }

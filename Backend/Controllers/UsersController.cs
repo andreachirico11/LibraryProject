@@ -32,5 +32,10 @@ namespace Backend.Controllers
         {
             return await unitOfWork.GetAllUsers();
         }
+        [HttpPost]
+        public async Task<UserDTO> InsertNewUser(Users newUser)
+        {
+            return await unitOfWork.InsertNewUser(newUser);
+        }
     }
 }

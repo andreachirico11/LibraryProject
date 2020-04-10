@@ -16,7 +16,7 @@ export class dbService {
         return this.addCover(books);
       }),
       map((books: BookModel[]) => {
-        if (this.userService.loggedUserLocal) {
+        if (this.userService.loggedUserLocal.favourites) {
           this.addIfIsFav(books);
         }
         return books;

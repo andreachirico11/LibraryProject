@@ -7,7 +7,7 @@ import {
   faCity,
   faPhone,
   faWindowClose,
-  faKey
+  faKey,
 } from "@fortawesome/free-solid-svg-icons";
 import { FormGroup, FormControl } from "@angular/forms";
 import { Validators } from "@angular/forms";
@@ -15,12 +15,11 @@ import { User } from "../shared/models/userModel";
 import { UserService } from "../shared/user.service";
 import { Subscription } from "rxjs";
 import { CustomValidators } from "../shared/customValidators";
-import { ValidationDirective } from "./validation.directive";
 
 @Component({
   selector: "app-registration",
   templateUrl: "./registrationForm.component.html",
-  styleUrls: ["./registration.component.css"]
+  styleUrls: ["./registration.component.css"],
 })
 export class RegistrationModalComponent implements OnInit {
   public iconsArray = [
@@ -31,7 +30,7 @@ export class RegistrationModalComponent implements OnInit {
     faCity,
     faPhone,
     faWindowClose,
-    faKey
+    faKey,
   ];
   registrationForm: FormGroup;
   subscription: Subscription;
@@ -45,45 +44,36 @@ export class RegistrationModalComponent implements OnInit {
       {
         name: new FormControl("", [
           Validators.required,
-          this.customValidators.literalValidator
+          this.customValidators.literalValidator,
         ]),
         surname: new FormControl("", [
           Validators.required,
-          this.customValidators.literalValidator
+          this.customValidators.literalValidator,
         ]),
         email: new FormControl("", [Validators.required, Validators.email]),
         adress: new FormControl("", [Validators.required]),
         city: new FormControl("", [
           Validators.required,
-          this.customValidators.literalValidator
+          this.customValidators.literalValidator,
         ]),
         phoneNumber: new FormControl("", [
           Validators.required,
           this.customValidators.cellPhoneValidator,
           Validators.maxLength(10),
-          Validators.minLength(10)
+          Validators.minLength(10),
         ]),
         password: new FormControl("", [
           Validators.required,
-          this.customValidators.passwordValidator
+          this.customValidators.passwordValidator,
         ]),
-        confirmPassword: new FormControl("", [Validators.required])
+        confirmPassword: new FormControl("", [Validators.required]),
       },
       {
         validators: [
           this.customValidators.passwordComparer,
-          this.customValidators.nameSurnameComparer
-        ]
+          this.customValidators.nameSurnameComparer,
+        ],
       }
-    );
-
-    // for testing
-    //  this.registrationForm.get('password').statusChanges.subscribe(
-    //    s =>{
-    //     console.log(this.registrationForm.get('password'))
-    //    })
-    this.registrationForm.statusChanges.subscribe(s =>
-      console.log(this.registrationForm)
     );
   }
 
@@ -94,7 +84,7 @@ export class RegistrationModalComponent implements OnInit {
   createUser(registrationForm: FormGroup): User {
     const completeAdress = `${this.registrationForm.get("adress").value}, ${
       this.registrationForm.get("city").value
-    }}`;
+    }`;
     return new User(
       this.registrationForm.get("email").value,
       this.registrationForm.get("password").value,
@@ -102,7 +92,7 @@ export class RegistrationModalComponent implements OnInit {
       false,
       this.registrationForm.get("name").value,
       this.registrationForm.get("surname").value,
-      null,
+      0,
       this.registrationForm.get("phoneNumber").value,
       completeAdress,
       null,
@@ -114,7 +104,7 @@ export class RegistrationModalComponent implements OnInit {
   submit() {
     this.subscription = this.userService
       .sendNewUser(this.createUser(this.registrationForm))
-      .subscribe(callRes => {
+      .subscribe((callRes) => {
         this.close();
       });
   }

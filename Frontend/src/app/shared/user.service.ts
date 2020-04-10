@@ -4,8 +4,8 @@ import { User } from "./models/userModel";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { take } from "rxjs/operators";
 import { Router } from "@angular/router";
-
 import { environment } from "../../environments/environment";
+
 
 @Injectable({ providedIn: "root" })
 export class UserService {
@@ -39,20 +39,22 @@ export class UserService {
     let callResult = new BehaviorSubject<boolean>(false);
     const jsonUser = JSON.stringify(newUser);
     this.http
-      .post(this.mockConnStr, jsonUser, { headers: this.head })
+      .post(this.connString, jsonUser, { headers: this.head })
       .pipe(take(1))
       .subscribe(
         (res: string) => {
           if (res) {
-            localStorage.setItem("loggedUser", res);
-            this.loggedUserLocal = JSON.parse(res);
+            this.loggedUserLocal = JSON.parse( JSON.stringify(res));
+            localStorage.setItem("loggedUser", JSON.stringify(res));
             this.loggedUser.next(this.loggedUserLocal);
             callResult.next(true);
+            this.router.navigate(["/home"]);
+          } else {
+            alert("AlreadyRegistered")
+            // return callResult;
           }
-          this.router.navigate(["/home"]);
-          return callResult;
         },
-        error => console.log("sendNewUserError")
+        error => console.error("sendNewUserError")
       );
     return callResult;
   }

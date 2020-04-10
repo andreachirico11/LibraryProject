@@ -67,6 +67,10 @@ namespace Backend.Models
         {
             return this.UserFavRepo.RemoveBookFromUserFavourites(bookAndUser);
         }
+        public Task<UserDTO> InsertNewUser(Users newUser)
+        {
+            return this.UserRepo.InsertNewUser(newUser);
+        }
 
 
 
