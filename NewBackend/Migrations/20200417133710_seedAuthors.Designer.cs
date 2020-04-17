@@ -10,8 +10,8 @@ using NewBackend;
 namespace NewBackend.Migrations
 {
     [DbContext(typeof(NewBackendDbContext))]
-    [Migration("20200416162020_relationBookFav")]
-    partial class relationBookFav
+    [Migration("20200417133710_seedAuthors")]
+    partial class seedAuthors
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,16 +29,52 @@ namespace NewBackend.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .HasColumnType("varchar")
-                        .HasMaxLength(20);
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Surname")
-                        .HasColumnType("varchar")
-                        .HasMaxLength(20);
+                        .HasColumnType("varchar(20)");
 
                     b.HasKey("IdAuthor");
 
                     b.ToTable("Authors","db");
+
+                    b.HasData(
+                        new
+                        {
+                            IdAuthor = 1,
+                            Name = "Agatha",
+                            Surname = "Christie"
+                        },
+                        new
+                        {
+                            IdAuthor = 2,
+                            Name = "Carlo",
+                            Surname = "Capra"
+                        },
+                        new
+                        {
+                            IdAuthor = 3,
+                            Name = "Giovanni",
+                            Surname = "Sabatucci"
+                        },
+                        new
+                        {
+                            IdAuthor = 4,
+                            Name = "Alessandro",
+                            Surname = "Bellini"
+                        },
+                        new
+                        {
+                            IdAuthor = 5,
+                            Name = "Sarah",
+                            Surname = "Gailey"
+                        },
+                        new
+                        {
+                            IdAuthor = 6,
+                            Name = "Steven",
+                            Surname = "Levy"
+                        });
                 });
 
             modelBuilder.Entity("NewBackend.Models.Book", b =>
@@ -57,6 +93,12 @@ namespace NewBackend.Migrations
                         .HasColumnType("varchar")
                         .HasMaxLength(50);
 
+                    b.Property<int>("IdAuthor")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdGenre")
+                        .HasColumnType("int");
+
                     b.Property<string>("Isbn")
                         .IsRequired()
                         .HasColumnType("varchar")
@@ -72,6 +114,10 @@ namespace NewBackend.Migrations
 
                     b.HasKey("IdBook");
 
+                    b.HasIndex("IdAuthor");
+
+                    b.HasIndex("IdGenre");
+
                     b.ToTable("Books","db");
                 });
 
@@ -83,17 +129,9 @@ namespace NewBackend.Migrations
                     b.Property<int>("IdBook")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BookIdBook")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserIdUser")
-                        .HasColumnType("int");
-
                     b.HasKey("IdUser", "IdBook");
 
-                    b.HasIndex("BookIdBook");
-
-                    b.HasIndex("UserIdUser");
+                    b.HasIndex("IdBook");
 
                     b.ToTable("Favourites","db");
                 });
@@ -121,13 +159,25 @@ namespace NewBackend.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateReturn")
                         .HasColumnType("datetime");
 
                     b.Property<DateTime>("DateStart")
                         .HasColumnType("datetime");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("IdLoan");
+
+                    b.HasIndex("BookId")
+                        .IsUnique();
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Loans","db");
                 });
@@ -179,15 +229,49 @@ namespace NewBackend.Migrations
                     b.ToTable("Users","db");
                 });
 
+            modelBuilder.Entity("NewBackend.Models.Book", b =>
+                {
+                    b.HasOne("NewBackend.Models.Author", "Author")
+                        .WithMany("Books")
+                        .HasForeignKey("IdAuthor")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NewBackend.Models.Genre", "Genre")
+                        .WithMany("Books")
+                        .HasForeignKey("IdGenre")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("NewBackend.Models.FavouritesUserBooks", b =>
                 {
                     b.HasOne("NewBackend.Models.Book", "Book")
-                        .WithMany("UserThatLike")
-                        .HasForeignKey("BookIdBook");
+                        .WithMany("FavouritesUserBooks")
+                        .HasForeignKey("IdBook")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("NewBackend.Models.User", "User")
-                        .WithMany("FavouriteBooks")
-                        .HasForeignKey("UserIdUser");
+                        .WithMany("FavouritesUserBooks")
+                        .HasForeignKey("IdUser")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("NewBackend.Models.Loan", b =>
+                {
+                    b.HasOne("NewBackend.Models.Book", "Book")
+                        .WithOne("Loan")
+                        .HasForeignKey("NewBackend.Models.Loan", "BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NewBackend.Models.User", "User")
+                        .WithOne("Loan")
+                        .HasForeignKey("NewBackend.Models.Loan", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

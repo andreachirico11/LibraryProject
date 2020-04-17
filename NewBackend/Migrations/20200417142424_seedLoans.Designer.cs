@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NewBackend;
 
 namespace NewBackend.Migrations
 {
     [DbContext(typeof(NewBackendDbContext))]
-    partial class NewBackendDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200417142424_seedLoans")]
+    partial class seedLoans
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -219,6 +221,23 @@ namespace NewBackend.Migrations
                         .IsUnique();
 
                     b.ToTable("Loans","db");
+
+                    b.HasData(
+                        new
+                        {
+                            IdLoan = 1,
+                            BookId = 1,
+                            DateReturn = new DateTime(2020, 4, 7, 19, 17, 25, 890, DateTimeKind.Unspecified).AddTicks(9926),
+                            DateStart = new DateTime(2020, 4, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = 1
+                        },
+                        new
+                        {
+                            IdLoan = 2,
+                            BookId = 2,
+                            DateStart = new DateTime(2020, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = 3
+                        });
                 });
 
             modelBuilder.Entity("NewBackend.Models.User", b =>

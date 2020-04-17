@@ -2,7 +2,7 @@
 
 namespace NewBackend.Migrations
 {
-    public partial class relationBookFav : Migration
+    public partial class userfav : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,40 +12,32 @@ namespace NewBackend.Migrations
                 columns: table => new
                 {
                     IdUser = table.Column<int>(nullable: false),
-                    IdBook = table.Column<int>(nullable: false),
-                    UserIdUser = table.Column<int>(nullable: true),
-                    BookIdBook = table.Column<int>(nullable: true)
+                    IdBook = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Favourites", x => new { x.IdUser, x.IdBook });
                     table.ForeignKey(
-                        name: "FK_Favourites_Books_BookIdBook",
-                        column: x => x.BookIdBook,
+                        name: "FK_Favourites_Books_IdBook",
+                        column: x => x.IdBook,
                         principalSchema: "db",
                         principalTable: "Books",
                         principalColumn: "IdBook",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Favourites_Users_UserIdUser",
-                        column: x => x.UserIdUser,
+                        name: "FK_Favourites_Users_IdUser",
+                        column: x => x.IdUser,
                         principalSchema: "db",
                         principalTable: "Users",
                         principalColumn: "IdUser",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Favourites_BookIdBook",
+                name: "IX_Favourites_IdBook",
                 schema: "db",
                 table: "Favourites",
-                column: "BookIdBook");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Favourites_UserIdUser",
-                schema: "db",
-                table: "Favourites",
-                column: "UserIdUser");
+                column: "IdBook");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

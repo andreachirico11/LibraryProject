@@ -34,9 +34,8 @@ namespace NewBackend
             modelBuilder.ApplyConfiguration(new GenreConfiguration());
             modelBuilder.ApplyConfiguration(new LoanConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
-
-            modelBuilder.Entity<FavouritesUserBooks>().ToTable("Favourites", "db")
-                        .HasKey(k => new {k.IdUser, k.IdBook});
+            modelBuilder.ApplyConfiguration(new UserFavouritesConfiguration());
+            
         }
     }
 }

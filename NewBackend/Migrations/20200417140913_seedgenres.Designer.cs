@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NewBackend;
 
 namespace NewBackend.Migrations
 {
     [DbContext(typeof(NewBackendDbContext))]
-    partial class NewBackendDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200417140913_seedgenres")]
+    partial class seedgenres
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,7 +47,7 @@ namespace NewBackend.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
-                        .HasColumnType("varchar(1000)");
+                        .HasColumnType("varchar(500)");
 
                     b.Property<string>("Editor")
                         .IsRequired()
@@ -75,63 +77,6 @@ namespace NewBackend.Migrations
                     b.HasIndex("IdGenre");
 
                     b.ToTable("Books","db");
-
-                    b.HasData(
-                        new
-                        {
-                            IdBook = 1,
-                            Description = "Esther is a stowaway. She's hidden herself away in the Librarian's book wagon in an attempt to escape the marriage her father has arranged for her--a marriage to the man who was previously engaged to her best friend. Her best friend who she was in love with. Her best friend who was just executed for possession of resistance propaganda.The future American Southwest is full of bandits, fascists, and queer librarian spies on horseback trying to do the right thing.",
-                            Editor = "Mondadori",
-                            IdAuthor = 3,
-                            IdGenre = 1,
-                            Isbn = "1250213584",
-                            PublishingYear = 2020,
-                            Title = "Upright Women Wanted"
-                        },
-                        new
-                        {
-                            IdBook = 2,
-                            Description = "Today, Facebook is nearly unrecognizable from Zuckerberg's first, modest iteration. It has grown into a tech giant, the largest social media platform and one of the most gargantuan companies in the world, with a valuation of more than $576 billion and almost 3 billion users, including those on its fully owned subsidiaries, Instagram and WhatsApp. There is no denying the power and omnipresence of Facebook in American daily life. And in light of recent controversies surrounding election-influencing fake news accounts, the handling of its users' personal data, and growing discontent with the actions of its founder and CEO, never has the company been more central to the national conversation.",
-                            Editor = "InMondadori",
-                            IdAuthor = 6,
-                            IdGenre = 3,
-                            Isbn = "0735213151",
-                            PublishingYear = 2020,
-                            Title = "Facebook: The Inside Story"
-                        },
-                        new
-                        {
-                            IdBook = 3,
-                            Description = "L'Orient-Express, il famoso treno che congiunge Parigi con Istanbul, è costretto ad una sosta forzata, bloccato dalla neve. A bordo qualcuno ne approfitta per compiere un efferato delitto, ma, sfortunatamente per l'assassino, tra i passeggeri c'è anche il famoso investigatore belga Hercule Poirot, al quale verranno affidate le indagini. Poirot, in effetti, risolverà il caso, non prima, però, di essersi imbattuto in una sensazionale sorpresa.",
-                            Editor = "Mondadori",
-                            IdAuthor = 1,
-                            IdGenre = 1,
-                            Isbn = "8804519045",
-                            PublishingYear = 2007,
-                            Title = "Assasinio sull'Orient Express"
-                        },
-                        new
-                        {
-                            IdBook = 4,
-                            Description = "Il volume si propone come una guida graduale e completa al linguaggio C e alla programmazione strutturata e modulare. Particolare attenzione è posta sui principi e sulle tecniche di programmazione, il controllo del flusso di esecuzione, la rappresentazione dei dati, la definizione e l'utilizzo di funzioni e librerie, le strutture dati, le operazioni di ingresso e uscita. Per quando riguarda il C il testo è stato aggiornato allo standard C11. La nuova edizione è anche anche un'introduzione alla programmazione orientata agli oggetti e al linguaggio Objective-C, che permette di programmare le app per iPhone, Ipad e per i computer della Apple. Grande cura è rivolta ai concetti di generalizzazione, classe, oggetto, istanza, ereditarietà e alla",
-                            Editor = "McGraw-Hill Education",
-                            IdAuthor = 4,
-                            IdGenre = 4,
-                            Isbn = "9788838665790",
-                            PublishingYear = 2013,
-                            Title = "Linguaggio C"
-                        },
-                        new
-                        {
-                            IdBook = 5,
-                            Description = "l Novecento, un secolo che si apre col trauma originario della Grande Guerra e si chiude con le grandi trasformazioni seguite alla caduta del muro di Berlino: è la periodizzazione di questo manuale, che si spinge ad analizzare gli ultimi eventi dei nostri giorni senza rinunciare a una struttura agile, maneggevole e rigorosa, a una scrittura piana e comprensibile, a una strumentazione didattica particolarmente efficace, dalle numerose cartine alle bibliografie ragionate che guidano l’approfondimento dei temi toccati. In questa nuova edizione, fortemente accresciuta e rivista, sono state inserite numerose nuove Parole chiave, indispensabili per focalizzare le principali categorie tematico-concettuali del periodo.",
-                            Editor = "Laterza",
-                            IdAuthor = 2,
-                            IdGenre = 1,
-                            Isbn = "9788842087427",
-                            PublishingYear = 2018,
-                            Title = "Storia contempo"
-                        });
                 });
 
             modelBuilder.Entity("NewBackend.Models.FavouritesUserBooks", b =>

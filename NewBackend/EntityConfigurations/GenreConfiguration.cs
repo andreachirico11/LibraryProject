@@ -15,8 +15,18 @@ namespace NewBackend
                     .IsRequired()
                     .ValueGeneratedOnAdd();
             builder.Property(g => g.Name)
-                    .HasColumnType("varchar")
-                    .HasMaxLength(20);
+                    .HasColumnType("varchar(20)");
+
+            builder.HasMany(gen => gen.Books)
+                    .WithOne(book => book.Genre)
+                    .HasForeignKey(Book => Book.IdGenre);
+        
+            builder.HasData(new Genre(1, "Fantasy"));
+            builder.HasData(new Genre(2, "Storico"));
+            builder.HasData(new Genre(3, "Saggistica"));
+            builder.HasData(new Genre(4, "Informatica"));
+            builder.HasData(new Genre(5, "Diritto"));
+        
         }
     }
 }
