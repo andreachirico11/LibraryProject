@@ -25,7 +25,18 @@ namespace NewBackend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<NewBackendDbContext>();
             services.AddControllers();
+            services.AddCors(options =>
+           {
+               options.AddPolicy("CorsPolicy",
+                   builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
+                   );
+           });
+            services.AddMvc()
+        .AddNewtonsoftJson(options =>
+         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+        );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +52,9 @@ namespace NewBackend
             app.UseRouting();
 
             app.UseAuthorization();
+
+
+            app.UseCors("CorsPolicy");
 
             app.UseEndpoints(endpoints =>
             {

@@ -25,6 +25,7 @@ namespace Backend.Models
             if (alreadyRegistered == null)
             {
                 newUser.IdUser = await getMaxId() + 1;
+                newUser.IsAdmin = 0;
                 Context.Users.Add(newUser);
                 await Context.SaveChangesAsync();
                 return new UserDTO(newUser);

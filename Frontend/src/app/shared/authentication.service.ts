@@ -49,7 +49,6 @@ export class AuthenticationService {
     const newUser = new User(
       res.email,
       res.password,
-      res.token,
       res.isAdmin,
       res.name,
       res.surname,

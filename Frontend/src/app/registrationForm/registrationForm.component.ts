@@ -88,7 +88,7 @@ export class RegistrationModalComponent implements OnInit {
     return new User(
       this.registrationForm.get("email").value,
       this.registrationForm.get("password").value,
-      "token",
+      // "token",
       false,
       this.registrationForm.get("name").value,
       this.registrationForm.get("surname").value,
@@ -96,7 +96,7 @@ export class RegistrationModalComponent implements OnInit {
       this.registrationForm.get("phoneNumber").value,
       completeAdress,
       null,
-      null,
+      [],
       null
     );
   }

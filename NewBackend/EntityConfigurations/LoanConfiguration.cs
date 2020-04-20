@@ -13,8 +13,8 @@ namespace NewBackend
             builder.HasKey(a => a.IdLoan);
             builder.Property(a => a.IdLoan)
                     .HasColumnType("int")
-                    .IsRequired()
-                    .ValueGeneratedOnAdd();
+                    .IsRequired();
+                    // .ValueGeneratedOnAdd();
             builder.Property(a => a.DateStart)
                     .HasColumnType("datetime")
                     .IsRequired();

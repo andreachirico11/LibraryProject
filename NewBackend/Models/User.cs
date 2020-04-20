@@ -22,6 +22,18 @@ namespace NewBackend.Models
             Phone = phone;
             ImgPath = imgPath;
         }
+        public User(UserDTO newUser)
+        {
+            Email = newUser.Email;
+            Password = newUser.Password;
+            IsAdmin = 0;
+            Name = newUser.Name;
+            Surname = newUser.Surname;
+            IdUser = 0;
+            Address = newUser.Address;
+            Phone = newUser.Phone;
+            ImgPath = newUser.ImgPath;
+        }
 
         public string Email { get; set; }
         public string Password { get; set; }

@@ -12,10 +12,10 @@ namespace NewBackend
             builder.HasKey(a => a.IdUser);
             builder.Property(a => a.IdUser)
                     .HasColumnType("int")
-                    .IsRequired()
-                    .ValueGeneratedOnAdd();
+                    .IsRequired();
+                //     .ValueGeneratedOnAdd();
             builder.Property(u => u.Email)
-                    .HasColumnType("varchar(20)")
+                    .HasColumnType("varchar(50)")
                     //     .HasMaxLength(20)
                     .IsRequired();
             builder.Property(u => u.Password)
@@ -34,7 +34,7 @@ namespace NewBackend
                     //     .HasMaxLength(20)
                     .IsRequired();
             builder.Property(u => u.Address)
-                    .HasColumnType("varchar(50)")
+                    .HasColumnType("varchar(100)")
                     //     .HasMaxLength(50)
                     ;
             builder.Property(u => u.Phone)

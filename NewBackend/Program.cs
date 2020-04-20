@@ -6,13 +6,27 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace NewBackend
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public  static void Main(string[] args)
         {
+
+            //  var ctx = new NewBackendDbContext();
+
+
+            //  var books =  ctx.Books.ToList();
+
+
+
+            //  foreach (var item in books)
+            //  {
+            //      System.Console.WriteLine(item.FavouritesUserBooks);
+            //  }
+
             CreateHostBuilder(args).Build().Run();
         }
 

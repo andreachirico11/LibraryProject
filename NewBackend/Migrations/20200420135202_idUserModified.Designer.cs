@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NewBackend;
 
 namespace NewBackend.Migrations
 {
     [DbContext(typeof(NewBackendDbContext))]
-    partial class NewBackendDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200420135202_idUserModified")]
+    partial class idUserModified
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -224,16 +226,16 @@ namespace NewBackend.Migrations
             modelBuilder.Entity("NewBackend.Models.User", b =>
                 {
                     b.Property<int>("IdUser")
-                        .ValueGeneratedOnAdd()
+                        // .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("ImgPath")
                         .HasColumnType("varchar(1000)");
