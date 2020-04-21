@@ -43,6 +43,33 @@ namespace Backend.Controllers
                             .Select(l => new LoanDTO(l))
                             .ToListAsync();
         }
+
+
+        [HttpPost]
+        public async Task<int> BorrowBook(BookAndUserIds bookAndUser)
+        {
+            var isAlreadyLoaned = await ctx.Loans
+                                            .Where(l => l.UserId == bookAndUser.idUser && l.BookId == bookAndUser.idBook && l.DateReturn == null)
+                                            .SingleOrDefaultAsync();
+
+            if (isAlreadyLoaned == null)
+            {
+                var actualDate = DateTime.Now;
+                ctx.Loans.Add(new Loan(0, actualDate, bookAndUser.idBook, bookAndUser.idUser));
+                return await ctx.SaveChangesAsync();
+
+            }
+            return 0;
+        }
+
+
+        [HttpDelete("{idBook}")]
+        public async Task<bool> DeleteLoanByBookId(int idBook)
+        {
+            var loanToUpdate = await ctx.Loans.Where(l => l.BookId == idBook && l.DateReturn == null ).SingleOrDefaultAsync();
+            loanToUpdate.DateReturn = DateTime.Now; 
+            return await ctx.SaveChangesAsync() > 0 ? true : false;
+        }
     }
 }
 
@@ -57,16 +84,3 @@ namespace Backend.Controllers
 
 
 
-
-
-// [HttpPost]
-// public async Task<bool> BorrowBook(BookAndUserIds bookAndUser)
-// {
-//     return await this.unitOfWork.BorrowBook(bookAndUser);
-// }
-
-// [HttpDelete("{idBook}")]
-// public async Task<bool> DeleteLoanByBookId(long idBook)
-// {
-//     return await this.unitOfWork.DeleteLoan(idBook);
-// }

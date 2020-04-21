@@ -48,7 +48,7 @@ namespace NewBackend.Models
         // public ICollection<int> Favourites { get; set;}
 
 
-        public virtual ICollection<FavouritesUserBooks> FavouritesUserBooks { get; set; }
-        public virtual Loan Loan { get; set; }
+        public  ICollection<FavouritesUserBooks> FavouritesUserBooks { get; set; }
+        public ICollection<Loan> Loan { get; set; }
     }
 }

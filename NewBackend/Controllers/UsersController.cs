@@ -71,7 +71,12 @@ namespace Backend.Controllers
             {
                 ctx.Users.Add( new User(newUser));
                 await ctx.SaveChangesAsync();
-                return newUser;          
+                var registeredUserId = await ctx.Users
+                                                .Where(u => u.Password == newUser.Password && u.Email == newUser.Email)
+                                                .Select(u => u.IdUser)
+                                                .SingleOrDefaultAsync();
+                newUser.IdUser = registeredUserId;
+                return newUser;        
         
             }
             return null;

@@ -5,7 +5,15 @@ namespace NewBackend.Models
 {
     public partial class Loan
     {
-        public Loan(int idLoan, DateTime dateStart, DateTime? dateReturn, int bookId, int userId)
+        public Loan(int idLoan, DateTime dateStart, int bookId, int userId)
+        {
+            IdLoan = idLoan;
+            DateStart = dateStart;
+            BookId = bookId;
+            UserId = userId;
+        }
+
+        public Loan(int idLoan, DateTime dateStart, int bookId, int userId, DateTime dateReturn)
         {
             IdLoan = idLoan;
             DateStart = dateStart;
@@ -21,7 +29,7 @@ namespace NewBackend.Models
         public int UserId { get; set; }
 
 
-        public virtual Book Book { get; set; }
-        public virtual User User { get; set; }
+        public  Book Book { get; set; }
+        public  User User { get; set; }
     }
 }

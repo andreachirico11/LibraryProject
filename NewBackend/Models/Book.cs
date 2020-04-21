@@ -32,9 +32,9 @@ namespace NewBackend.Models
         public int IdAuthor { get; set; }
 
 
-        public virtual ICollection<FavouritesUserBooks> FavouritesUserBooks { get; set; }
-        public virtual Genre Genre { get; set; }
-        public virtual Author Author { get; set; }
-        public virtual Loan Loan { get; set; }
+        public ICollection<FavouritesUserBooks> FavouritesUserBooks { get; set; }
+        public Genre Genre { get; set; }
+        public Author Author { get; set; }
+        public ICollection<Loan> Loan { get; set; }
     }
 }

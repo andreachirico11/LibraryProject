@@ -20,7 +20,7 @@ public class BookDTO
         Editor = book.Editor;
         PublishingYear = book.PublishingYear;
         Genre = book.Genre.Name;
-        Author = book.Author.Name +' ' + book.Author.Surname;
+        Author = book.Author.Name + ' ' + book.Author.Surname;
         Description = book.Description;
         Isbn = book.Isbn;
         IsRented = this.VerifyIfIsRented(book);
@@ -31,18 +31,16 @@ public class BookDTO
     {
         if (book.Loan != null)
         {
-            if (book.Loan.DateReturn == null)
+            foreach (var loan in book.Loan)
             {
-                return  true;
+                if (loan.DateReturn == null)
+                {
+                    return true;
+                }
             }
-            else
-            {
-                return  false;
-            }
-        } else {
-            return false;
         }
 
+        return false;
     }
 
 
