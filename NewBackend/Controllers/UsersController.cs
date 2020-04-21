@@ -77,20 +77,6 @@ namespace Backend.Controllers
             return null;
         }
 
-
-
-
-
-
-        // public async Task<int> getMaxId()
-        // {
-        //     return await this.ctx.Users
-        //                         .OrderByDescending(u => u.IdUser)
-        //                         .Select(uf => uf.IdUser)
-        //                         .FirstOrDefaultAsync();
-        // }
-
-
     }
 
 

@@ -8,6 +8,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 
+
+
 namespace NewBackend
 {
     public class Program
@@ -28,6 +30,9 @@ namespace NewBackend
             //  }
 
             CreateHostBuilder(args).Build().Run();
+
+            
+
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

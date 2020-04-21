@@ -49,10 +49,6 @@ namespace NewBackend
                         .FirstOrDefaultAsync();
         }
 
-
-
-
-
     }
 }
 
@@ -69,36 +65,7 @@ namespace NewBackend
 
 
 
-// public IUnitOfWork unitOfWork { get; set; }
-// public BooksController(IUnitOfWork uow) 
-// {
-//     this.unitOfWork = uow;
-// }
-
-
-// [HttpPost]
-// public async Task<bool> PostBook(BookDTO newBook)
-// {
-//     return await unitOfWork.InsertBook(newBook);
-// }
 
 
 
 
-
-// [HttpPut("{id}")]
-// public async Task<int> UpdateBook(Books newBook, long id)
-// {
-//     if(id != newBook.IdBook) {
-//         BadRequest();
-//     }
-//     // return await unitOfWork.UpdateBook(newBook);
-//     throw new NotImplementedException();
-// }
-
-// [HttpDelete("{id}")]
-// public async Task<int> DeleteBook(long id) 
-// {
-//     // return await unitOfWork.DeleteBook(id);
-//     throw new NotImplementedException();
-// }

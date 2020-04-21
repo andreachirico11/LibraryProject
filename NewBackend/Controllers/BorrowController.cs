@@ -40,7 +40,6 @@ namespace Backend.Controllers
                             .Where(l => l.UserId == idUser)
                             .Where(l => l.DateReturn == null)
                             .Include(l => l.Book)
-                            // .Include(l => l.User)
                             .Select(l => new LoanDTO(l))
                             .ToListAsync();
         }
