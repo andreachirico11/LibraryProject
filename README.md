@@ -7,4 +7,4 @@ run `npm install` and `ng serve` in the frontend folder
 * ### Backend: 
 run the project with visual studio, **pay attention to the SqLite db location**
 * ### New Backend: 
-run the project in visual studio,
+run the project in visual studio, a sql server database is required, the datas are in the Database folder
